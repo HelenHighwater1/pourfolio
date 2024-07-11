@@ -18,11 +18,11 @@ class User(db.Model):
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
 
-    # TODO -dont know if i'll want this... but...
-    # cellar = db.relationship("Cellar", back_populates="user")
+    cellar = db.relationship("Cellar", back_populates="user")
+    tasting_notes = db.relationship("TastingNote", back_populates='user')
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} name={self.name} email={self.email}>'
+        return f'<User user_id={self.user_id} name={self.user_name} email={self.email}>'
 
 
 class Cellar(db.Model):
@@ -34,11 +34,12 @@ class Cellar(db.Model):
                         autoincrement=True,
                         primary_key=True)
 
-    # TODO -Check on this... plurals ok? 
+    user = db.relationship("User", back_populates="cellar")
     lots = db.relationship("Lot", back_populates="cellar")
 
     def __repr__(self):
         return f'<Cellar cellar_id={self.cellar_id}>'
+
 
 class Lot(db.Model):
     """A lot of wine -> Specific wine that belongs to a vineyard, has one year, 
@@ -53,14 +54,16 @@ class Lot(db.Model):
     vineyard_id = db.Column(db.ForeignKey('vineyards.vineyard_id'))
     varietal = db.Column(db.String(40))
     wine_name = db.Column(db.String(50))
-    vintage = db.Column(db.Integer)
+    vintage = db.Column(db.DateTime)
     celebration = db.Column(db.Boolean, default=False)
 
     #TODO -check this again for singular vs plural
     cellar = db.relationship("Cellar", back_populates="lots")
+    vineyard = db.relationship("Vineyard", back_populates="lot")
+    bottles = db.relationship("Bottle", back_populates="lot")
 
     def __repr__(self):
-        return f'<Lot lot_id={self.lot_id} name={self.wine_name} email={self.vintage}, celebration={self.celebration}>'
+        return f'<Lot lot_id={self.lot_id} name={self.wine_name} vintage={self.vintage}, vineyard={self.vineyard_id} celebration={self.celebration}>'
 
 
 class Bottle(db.Model):
@@ -78,11 +81,13 @@ class Bottle(db.Model):
     price = db.Column(db.Integer)
     drunk = db.Column(db.Boolean, default=False)
 
-    # dont know if i'll want this... but...
-    # cellar = db.relationship("Cellar", back_populates="user")
+ 
+    lot = db.relationship("Lot", back_populates="bottles")
+    tasting_notes = db.relationship("TastingNote", back_populates="bottle")
+
 
     def __repr__(self):
-        return f'<Bottle bottle_id={self.user_id} drinkable_date={self.drinkable_date} price={self.price} drunk={self.drunk}>'
+        return f'<Bottle bottle_id={self.bottle_id} drinkable_date={self.drinkable_date} purchase_date={self.purchase_date} price={self.price} drunk={self.drunk}>'
 
 
 class TastingNote(db.Model):
@@ -96,10 +101,11 @@ class TastingNote(db.Model):
     bottle_id = db.Column(db.ForeignKey('bottles.bottle_id'))
     user_id = db.Column(db.ForeignKey('users.user_id'))
     note = db.Column(db.Text)
-    purchase_date = db.Column(db.DateTime)
+    date = db.Column(db.DateTime)
 
     # TODO - Check singular vs plural
-    bottle = db.relationship("Bottle", back_populates="tasting_note")
+    bottle = db.relationship("Bottle", back_populates="tasting_notes")
+    user= db.relationship("User", back_populates="tasting_notes")
 
     def __repr__(self):
         return f'<Tasting_note tasting_note_id={self.tasting_note_id} bottle_id={self.bottle_id} user={self.user_id}>'
@@ -116,6 +122,8 @@ class Vineyard(db.Model):
     name = db.Column(db.String, unique=True)
     country = db.Column(db.String)
     region = db.Column(db.String)
+
+    lot = db.relationship("Lot", back_populates="vineyard")
 
 
     def __repr__(self):

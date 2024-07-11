@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+<h1>{{ lot.wine_name}} {{ lot.vintage.year }}</h1>
+
+<form action="/logout">
+    <button type="submit">Log out</button>
+</form>
+
+<p> THIS IS A LOT</p>
+<p> Bottles available to drink now:
+{{ count_drinkable_bottles }}
+</p>
+
+<p> All Bottles in Cellar: 
+    {{ count_all_bottles }}
+</p>
+<p>tasting notes:</p>
+
+<ul>
+    {% for note in all_tasting_notes %}
+    <li>
+        {{ note.date.month }}, {{ note.date.year }}<br>
+        {{ note.note }}
+    </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

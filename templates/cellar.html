@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+<h1>{{ user.user_name}}'s' cellar</h1>
+
+<form action="/logout">
+    <button type="submit">Log out</button>
+</form>
+
+<p>THIS IS THE USERS CELLAR</p>
+
+<ul>
+    {% for lot in all_cellar_lots %}
+    <li>
+        <a href='/lots/{{ lot.lot_id }}'>
+            {{ lot.wine_name }}
+            {{ lot.vintage.year }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Hourglass Estate",
+    "country": "USA",
+    "region": "Napa Valley"
+  },
+  {
+    "name": "Kendall-Jackson",
+    "country": "USA",
+    "region": "California"
+  },
+  {
+    "name": "Cloudy Bay",
+    "country": "New Zealand",
+    "region": "Marlborough"
+  },
+  {
+    "name": "E. Guigal",
+    "country": "France",
+    "region": "Rhône Valley"
+  },
+  {
+    "name": "Catena Zapata",
+    "country": "Argentina",
+    "region": "Mendoza"
+  },
+  {
+    "name": "Dr. Loosen",
+    "country": "Germany",
+    "region": "Mosel"
+  },
+  {
+    "name": "Marqués de Riscal",
+    "country": "Spain",
+    "region": "Rioja"
+  },
+  {
+    "name": "Antinori",
+    "country": "Italy",
+    "region": "Tuscany"
+  },
+  {
+    "name": "Vietti",
+    "country": "Italy",
+    "region": "Piedmont"
+  },
+  {
+    "name": "Domaine Huet",
+    "country": "France",
+    "region": "Loire Valley"
+  },
+  {
+    "name": "Yalumba",
+    "country": "Australia",
+    "region": "Eden Valley"
+  },
+  {
+    "name": "Gaja",
+    "country": "Italy",
+    "region": "Piedmont"
+  },
+  {
+    "name": "Ridge Vineyards",
+    "country": "USA",
+    "region": "California"
+  },
+  {
+    "name": "Duckhorn Vineyards",
+    "country": "USA",
+    "region": "Napa Valley"
+  },
+  {
+    "name": "Clos Saint Jean",
+    "country": "France",
+    "region": "Châteauneuf-du-Pape"
+  },
+  {
+    "name": "Silver Oak",
+    "country": "USA",
+    "region": "Napa Valley"
+  },
+  {
+    "name": "Pine Ridge",
+    "country": "USA",
+    "region": "Napa Valley"
+  },
+  {
+    "name": "Tablas Creek Vineyard",
+    "country": "USA",
+    "region": "Paso Robles"
+  },
+  {
+    "name": "Pazo de Señorans",
+    "country": "Spain",
+    "region": "Rías Baixas"
+  },
+  {
+    "name": "Montes",
+    "country": "Chile",
+    "region": "Colchagua Valley"
+  },
+  {
+    "name": "Trimbach",
+    "country": "France",
+    "region": "Alsace"
+  },
+  {
+    "name": "Feudi di San Gregorio",
+    "country": "Italy",
+    "region": "Campania"
+  }
+]

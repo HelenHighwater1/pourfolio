@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+<h1>Welcome to Pourfolio!</h1>
+
+<h2>Log In</h2>
+<form action="/login" method="POST">
+    Email <input type="text" name="email"><br>
+    Password <input type="password" name="password"><br>
+    <input type="submit">
+</form>
+<br>
+
+<h2>Sign Up</h2>
+<form action="/sign_up" method="POST">
+    Username <input type="text" name="user_name"><br>
+    Email <input type="text" name="email"><br>
+    Password <input type="password" name="password"><br>
+    <input type="submit">
+</form>
+
+{% endblock %}
