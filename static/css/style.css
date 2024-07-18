@@ -1,0 +1,7 @@
+.card-columns {
+    media-breakpoint-only {
+        column-count: 6;
+    }
+
+
+}

@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}Sign In{% endblock %}
+{% block title %}{{ user.user_name}}{% endblock %}
 
 {% block body %}
-<h1>{{ user.user_name}}'s' cellar</h1>
+<h3> Cellar contents: </h3>
 
-<form action="/logout">
-    <button type="submit">Log out</button>
-</form>
-
-<p>THIS IS THE USERS CELLAR</p>
-
-<ul>
-    {% for lot in all_cellar_lots %}
-    <li>
-        <a href='/lots/{{ lot.lot_id }}'>
-            {{ lot.wine_name }}
-            {{ lot.vintage.year }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-
+{% if all_cellar_lots %}
+    <div class="card-columns">
+        {% for lot in all_cellar_lots %}
+        <div class="card" >
+            <a href='/lots/{{ lot.lot_id }}'>
+            <img class="card-img-top" src='static/imgs/generic_red.png' alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">{{ lot.wine_name }}</p>
+                <p class="card-text">{{ lot.vintage.year }}</p>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Uh-oh - you have nothing in your cellar.</p>
+{% endif %}
 
 {% endblock %}

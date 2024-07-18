@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Add to Cellar{% endblock %}
+
+{% block body %}
+<h1>Create a tasting note for this bottle? </h1>
+
+<form action="/create_tasting_note/{{bottle.bottle_id}}" method="POST">
+    note <input type="text" name="note"><br>
+    <input type="submit">
+</form>
+
+<form action="/lots/{{bottle.lot_id}}">
+    <button type="submit">meh - I dont need to make a tasting note today</button>
+</form>
+
+{% endblock %}

@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}Sign In{% endblock %}
+{% block title %}{{lot.wine_name}}{% endblock %}
 
 {% block body %}
 <h1>{{ lot.wine_name}} {{ lot.vintage.year }}</h1>
 
+<form action="/cellar">
+    <button type="submit">Back to cellar</button>
+</form>
 <form action="/logout">
     <button type="submit">Log out</button>
 </form>
 
-<p> THIS IS A LOT</p>
+
 <p> Bottles available to drink now:
 {{ count_drinkable_bottles }}
 </p>
@@ -16,6 +19,19 @@
 <p> All Bottles in Cellar: 
     {{ count_all_bottles }}
 </p>
+
+<form action='/drink/{{ lot.lot_id }}' methods="POST">
+    <button type="submit">Drink a bottle</button>
+</form>
+
+<h3>Add bottles to lot</h3>
+<form action='/create_aging_schedule/{{ lot.lot_id }}', methods="POST">
+    Quantity: <input type="integer" name="bottle_qty"><br>
+    <button type="submit">Add bottles</button>
+</form>
+
+<br>
+
 <p>tasting notes:</p>
 
 <ul>

@@ -2,6 +2,7 @@
 
 from model import db, User, Cellar, Lot, Bottle, TastingNote, Vineyard, connect_to_db
 
+from sqlalchemy import func
 from datetime import datetime
 
 # -----------------------
@@ -25,17 +26,20 @@ def create_user(user_name, email, password):
 
 def get_user_by_id(id): 
     user = User.query.get(id)
+
     return user
 
 
 def get_user_by_email(email): 
-
     user = User.query.filter(User.email == email).first()
+
     return user
+
 
 # -----------------------
 # ----------------------- CELLAR OPERATIONS -----------------------
 # -----------------------
+
 def create_cellar():
     """Create and return a new Cellar"""
 
@@ -52,13 +56,21 @@ def get_all_cellar_lots(cellar_id):
     
     return all_lots
 
+def get_cellar_by_id(cellar_id):
+    cellar = Cellar.query.get(cellar_id)
+    return cellar
+
 # -----------------------
-# ----------------------- LOT OPERATIONS -----------------------
+# ----------------------- LOT OPERATIONS -------------------------
 # -----------------------
 
 def create_lot(cellar, vineyard, varietal, wine_name, vintage, celebration=False):
     """Creates a new lot.  A lot is a batch of a specific wine with a specific year"""
 
+    if not isinstance(vintage, datetime):
+        year = int(vintage)
+        vintage = datetime(year = year, day=1, month=1)
+    
     lot = Lot(cellar=cellar,
               vineyard=vineyard,
               varietal=varietal,  
@@ -76,6 +88,14 @@ def create_lot(cellar, vineyard, varietal, wine_name, vintage, celebration=False
 def get_lot_by_id(lot_id): 
     lot = Lot.query.get(lot_id)
     return lot
+
+def get_lot_aging_schedule(lot_id):
+    all_bottles_aging_schedule = Bottle.query(
+        Bottle.drinkable_date, 
+        func.count(Bottle.bottle_id)
+        ).filter(
+            Bottle.lot_id == lot_id
+            ).group_by(Bottle.drinkable_date)
 
 
 # -----------------------
@@ -97,6 +117,12 @@ def create_bottle(lot, drinkable_date, purchase_date, price, drunk=False):
 
     return bottle
 
+
+def get_bottle_by_id(bottle_id):
+    bottle = Bottle.query.get(bottle_id)
+    return bottle
+
+
 def get_count_drinkable_bottles(lot_id):
     this_year = datetime.today()
     count_of_drinkable_bottles = Bottle.query.filter(Bottle.lot_id == lot_id, 
@@ -110,6 +136,19 @@ def get_count_all_bottles(lot_id):
                                             Bottle.drunk == False, 
                                             ).count()
     return count_all_bottles
+
+def drink_earliest_drinkable_date_bottle(lot_id):
+    """ Returns the bottle from a lot with the earliest "drinkable date" """
+    earliest_drinkable_date_bottle = Bottle.query.filter(Bottle.lot_id == lot_id, 
+                                                     Bottle.drunk == False
+                                                    ).order_by(Bottle.drinkable_date).first()
+    
+    earliest_drinkable_date_bottle.drunk = True
+    db.session.add(earliest_drinkable_date_bottle)
+    db.session.commit()
+    
+    return earliest_drinkable_date_bottle
+ 
 
 
 # -----------------------
@@ -139,8 +178,8 @@ def get_all_tasting_notes(lot_id):
 # -----------------------
 # ----------------------- VINEYARD OPERATIONS -----------------------
 # -----------------------
+
 def create_vineyard(name, country, region):
-    """Creates new vineyard"""
     """Creates new vineyard"""
 
     vineyard = Vineyard(name=name, country=country, region=region)
@@ -150,7 +189,18 @@ def create_vineyard(name, country, region):
 
     return vineyard
 
+def get_all_vineyards():
+    all_vineyards = Vineyard.query.all()
+    return all_vineyards
 
+def get_vineyard_by_id(vineyard_id):
+    vineyard = Vineyard.query.get(vineyard_id)
+    return vineyard
+
+
+
+# ----------------------------------------------------------------
+# -----------------------------------------------------------------
 
 if __name__ == '__main__':
     from server import app

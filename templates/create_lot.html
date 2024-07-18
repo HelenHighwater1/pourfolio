@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Add to Cellar{% endblock %}
+
+{% block body %}
+<h1>Add to your cellar: </h1>
+
+<form action="/create_lot" method="POST">
+    Wine name <input type="string" name="wine_name"><br>
+    Varietal:
+        <select id="varietal" name="varietal">
+            {% for varietal in VARIETALS %}
+            <option value="{{ varietal }}">{{ varietal }}</option>
+            {% endfor %}
+        </select><br>
+    Vineyard: 
+        <select id = "vineyard" name="vineyard">
+            {% for vineyard in all_vineyards %}
+                <option value="{{vineyard.vineyard_id}}">{{ vineyard.name }}</option>
+            {% endfor %}
+        </select><br>
+    Vintage: <input type="integer" name="vintage"><br>
+    Celebration: <input type="radio" id="true" name="celebration" value="True">
+    <label for="true">Yes!</label>
+    <input type="radio" id="false" name="celebration" value="False">
+    <label for="false">Nope</label><br>
+    Number of Bottles: <input type="integer" name="bottle_qty"><br>
+    <input type="submit">
+</form>
+
+<form action='/add_vineyard'>
+    <button type="submit">Create New Vineyard</button>
+</form>
+
+<p>TODO make vineyard button a modal? Pop it in by the vineyard within form?</p>
+<p>TODO change drop down to active search input bar thing...</p>
+
+
+{% endblock %}

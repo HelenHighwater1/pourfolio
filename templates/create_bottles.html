@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Add Bottles of {{ lot.vintage.year }} {{ lot.wine_name }}{% endblock %}
+
+{% block body %}
+<h1>Add bottles of {{ lot.vintage.year }} {{ lot.wine_name }}: </h1>
+
+<form action="/create_bottles" method="POST">
+    Quantity <input type="integer" name="qty"><br>
+    <input type="submit">
+</form>
+
+
+{% endblock %}

@@ -57,7 +57,6 @@ class Lot(db.Model):
     vintage = db.Column(db.DateTime)
     celebration = db.Column(db.Boolean, default=False)
 
-    #TODO -check this again for singular vs plural
     cellar = db.relationship("Cellar", back_populates="lots")
     vineyard = db.relationship("Vineyard", back_populates="lot")
     bottles = db.relationship("Bottle", back_populates="lot")
@@ -78,7 +77,7 @@ class Bottle(db.Model):
     # TODO - consider how drinkable date works.
     drinkable_date = db.Column(db.DateTime)
     purchase_date = db.Column(db.DateTime)
-    price = db.Column(db.Integer)
+    price = db.Column(db.Integer, nullable=True)
     drunk = db.Column(db.Boolean, default=False)
 
  
@@ -128,6 +127,58 @@ class Vineyard(db.Model):
 
     def __repr__(self):
         return f'<Vineyard vineyard_id={self.vineyard_id} name={self.name} region={self.region} country={self.country}>'
+
+
+
+VARIETALS = wine_varietals = [
+    # Red Wine Varietals
+    "Cabernet Sauvignon",
+    "Merlot",
+    "Pinot Noir",
+    "Syrah/Shiraz",
+    "Bordeaux"
+    "Zinfandel",
+    "Malbec",
+    "Sangiovese",
+    "Grenache",
+    "Tempranillo",
+    "Nebbiolo",
+    "Barbera",
+    "Carmenere",
+    "Petit Verdot",
+    "Mourvedre",
+    "Cabernet Franc",
+
+    # White Wine Varietals
+    "Chardonnay",
+    "Sauvignon Blanc",
+    "Riesling",
+    "Pinot Grigio/Pinot Gris",
+    "Gewürztraminer",
+    "Chenin Blanc",
+    "Moscato/Muscat",
+    "Semillon",
+    "Viognier",
+    "Grüner Veltliner",
+    "Albarino",
+
+
+    # Rosé Wine Varietals
+    "Rose"
+
+    # Sparkling Wine Varietals
+    "Champagne",
+    "Brut",
+    "Blanc de Blancs",
+    "Prosecco",
+    "Moscato",
+
+    # Dessert Wine Varietals
+    "Port",
+    "Sherry",
+    "Sauternes",
+    "Madeira"
+]
 
 
 
