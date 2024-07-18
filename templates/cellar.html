@@ -5,7 +5,7 @@
 <h3> Cellar contents: </h3>
 
 {% if all_cellar_lots %}
-    <div class="card-columns">
+    <div class="card-columns" style="width: 10rem;">
         {% for lot in all_cellar_lots %}
         <div class="card" >
             <a href='/lots/{{ lot.lot_id }}'>
