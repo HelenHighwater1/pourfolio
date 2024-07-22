@@ -62,7 +62,19 @@ class Lot(db.Model):
     bottles = db.relationship("Bottle", back_populates="lot")
 
     def __repr__(self):
-        return f'<Lot lot_id={self.lot_id} name={self.wine_name} vintage={self.vintage}, vineyard={self.vineyard_id} celebration={self.celebration}>'
+        return f'<Lot lot_id={self.lot_id} name={self.wine_name} varietal={self.varietal} vintage={self.vintage}, vineyard={self.vineyard_id} celebration={self.celebration}>'
+
+    def make_dict(self):
+        return {
+            'lot_id': self.lot_id,
+            'cellar_id': self.cellar_id,
+            'vineyard_id': self.vineyard_id,
+            'varietal': self.varietal, 
+            'wine_name': self.wine_name,
+            'vintage': self.vintage,
+            'celebration': self.celebration
+        }
+        
 
 
 class Bottle(db.Model):
@@ -74,7 +86,6 @@ class Bottle(db.Model):
                         autoincrement=True,
                         primary_key=True)
     lot_id = db.Column(db.ForeignKey('lots.lot_id')) 
-    # TODO - consider how drinkable date works.
     drinkable_date = db.Column(db.DateTime)
     purchase_date = db.Column(db.DateTime)
     price = db.Column(db.Integer, nullable=True)
@@ -87,6 +98,7 @@ class Bottle(db.Model):
 
     def __repr__(self):
         return f'<Bottle bottle_id={self.bottle_id} drinkable_date={self.drinkable_date} purchase_date={self.purchase_date} price={self.price} drunk={self.drunk}>'
+
 
 
 class TastingNote(db.Model):

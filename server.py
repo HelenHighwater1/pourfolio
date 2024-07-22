@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session, redirect, url_for
+from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify
 from datetime import datetime
 from model import VARIETALS, connect_to_db, db
 
@@ -29,6 +29,7 @@ def login():
     if user:
         if user.password == password:
             session['user'] = user.user_id
+            session['user_name'] = user.user_name
             session['cellar']= user.cellar_id
             flash('logged in!')
             return redirect('/cellar')
@@ -67,18 +68,47 @@ def logout():
 
 
 # -----------------------
-# ----------------------- CELLER / LOT ROUTES ---------------------
+# ----------------------- CELLER ROUTES ---------------------
 # -----------------------
 
 @app.route('/cellar')
 def cellar():
     user = crud.get_user_by_id(session['user'])
+    
     if user: 
         all_cellar_lots = crud.get_all_cellar_lots(session['cellar'])
-        return render_template('cellar.html', user=user, all_cellar_lots=all_cellar_lots)
+        return render_template('cellar.html', user=user, all_cellar_lots=all_cellar_lots, varietals=VARIETALS)
     else: 
         return redirect('/')
     
+
+@app.route('/add_to_cellar')
+def add_to_cellar():
+    all_vineyards = crud.get_all_vineyards()
+    return render_template('create_lot.html', all_vineyards=all_vineyards, VARIETALS=VARIETALS)
+
+
+
+# -----------------------
+# ----------------------- FILTER CELLAR ROUTES ---------------------
+# -----------------------
+
+@app.route('/filter_cellar')
+def filter_cellar():
+    filter_on = request.args.get('filter_on')
+    filter_val = request.args.get('filter_val')
+    cellar_id = session['cellar']
+    filtered_lots = crud.filter_cellar_lots(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
+    dict_lots = []
+    for lot in filtered_lots:
+        dict_lots.append(lot.make_dict())
+
+    return jsonify(dict_lots)
+
+
+# -----------------------
+# ----------------------- LOT ROUTES ---------------------
+# -----------------------
 
 @app.route('/lots/<lot_id>')
 def show_lot(lot_id):
@@ -92,12 +122,6 @@ def show_lot(lot_id):
                            count_all_bottles=count_all_bottles, 
                            all_tasting_notes=all_tasting_notes, 
                            )
-
-
-@app.route('/add_to_cellar')
-def add_to_cellar():
-    all_vineyards = crud.get_all_vineyards()
-    return render_template('create_lot.html', all_vineyards=all_vineyards, VARIETALS=VARIETALS)
 
 
 @app.route('/create_lot', methods=['POST'])
@@ -125,27 +149,25 @@ def create_lot():
               celebration=celebration
               )
     
-    return redirect(url_for(f'/add_bottles/{lot.lot_id}'), bottle_qty=bottle_qty)
-
+    return redirect(url_for('create_aging_lot', lot_id=lot.lot_id, bottle_qty=bottle_qty))
 
 
 # -----------------------
 # ----------------------- BOTTLE ROUTES -----------------------
 # -----------------------
 
-@app.route('/drink/<lot_id>', methods=["POST"])
+@app.route('/drink/<lot_id>')
 def drink_bottle(lot_id): 
     """Takes the bottle with earliest "drinkable" date and sets it to drunk= True """
-    
     bottle = crud.drink_earliest_drinkable_date_bottle(lot_id)
 
     return render_template('create_tasting_note.html', bottle=bottle)
 
-# TODO - This probably needs to be deleted: 
 
 @app.route('/create_aging_schedule/<lot_id>')
 def create_aging_lot(lot_id):
-    lot_aging_schedule = crud.get_lot_aging_schedule
+    #TODO -> catch errors when number blank
+    lot_aging_schedule = crud.get_lot_aging_schedule(lot_id)
     lot = crud.get_lot_by_id(lot_id) 
     bottle_qty = int(request.args['bottle_qty'])
     return render_template('create_aging_schedule.html', lot=lot, bottle_qty=bottle_qty, lot_aging_schedule=lot_aging_schedule)

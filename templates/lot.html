@@ -20,12 +20,13 @@
     {{ count_all_bottles }}
 </p>
 
-<form action='/drink/{{ lot.lot_id }}' methods="POST">
+<form action='/drink/{{ lot.lot_id }}' >
     <button type="submit">Drink a bottle</button>
 </form>
 
+<p>TODO catch errors for no-number submission</p>
 <h3>Add bottles to lot</h3>
-<form action='/create_aging_schedule/{{ lot.lot_id }}', methods="POST">
+<form action='/create_aging_schedule/{{ lot.lot_id }}'>
     Quantity: <input type="integer" name="bottle_qty"><br>
     <button type="submit">Add bottles</button>
 </form>

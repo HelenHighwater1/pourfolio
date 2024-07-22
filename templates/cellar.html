@@ -3,9 +3,27 @@
 
 {% block body %}
 <h3> Cellar contents: </h3>
-
+<div>
+    <h4>Filter by:</h4>
+    <ul>
+        <li>
+            <select id="varietal">
+                <option  value="varietal">Varietal</option>
+                    {% for item in varietals %}
+                        <option id="varietal" value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+            </select>
+        </li>
+        <li>Country</li>
+        <li>Region</li>
+        <li>Vineyard</li>
+        <li>Celebration</li>
+        <li>Vintage</li>
+    </ul>
+</div>
+<div id='cellar_lots'>
 {% if all_cellar_lots %}
-    <div class="card-columns">
+    <div class="card-columns" id="cellar-lots">
         {% for lot in all_cellar_lots %}
         <div class="card" >
             <a href='/lots/{{ lot.lot_id }}'>
@@ -18,8 +36,10 @@
         </div>
         {% endfor %}
     </div>
+</div>
 {% else %}
     <p>Uh-oh - you have nothing in your cellar.</p>
 {% endif %}
 
+<script src="/static/filters.js"></script>
 {% endblock %}

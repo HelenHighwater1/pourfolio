@@ -2,6 +2,7 @@
 
 from model import db, User, Cellar, Lot, Bottle, TastingNote, Vineyard, connect_to_db
 
+
 from sqlalchemy import func
 from datetime import datetime
 
@@ -60,9 +61,21 @@ def get_cellar_by_id(cellar_id):
     cellar = Cellar.query.get(cellar_id)
     return cellar
 
+
+# -----------------------
+# ----------------------- CELLAR FILTER OPERATIONS -------------------------
+# -----------------------
+
+def filter_cellar_lots(filter_on, filter_val, cellar_id):
+    all_filtered_lots = db.session.query(Lot).filter(Lot.cellar_id == cellar_id).where(getattr(Lot, f'{filter_on}') == filter_val).all()
+
+    return all_filtered_lots
+
+
 # -----------------------
 # ----------------------- LOT OPERATIONS -------------------------
 # -----------------------
+
 
 def create_lot(cellar, vineyard, varietal, wine_name, vintage, celebration=False):
     """Creates a new lot.  A lot is a batch of a specific wine with a specific year"""
@@ -89,13 +102,17 @@ def get_lot_by_id(lot_id):
     lot = Lot.query.get(lot_id)
     return lot
 
+
 def get_lot_aging_schedule(lot_id):
-    all_bottles_aging_schedule = Bottle.query(
+    all_bottles_aging_schedule = db.session.query(
         Bottle.drinkable_date, 
         func.count(Bottle.bottle_id)
         ).filter(
             Bottle.lot_id == lot_id
-            ).group_by(Bottle.drinkable_date)
+            ).group_by(Bottle.drinkable_date).order_by(Bottle.drinkable_date)
+
+
+    return all_bottles_aging_schedule
 
 
 # -----------------------
@@ -142,7 +159,7 @@ def drink_earliest_drinkable_date_bottle(lot_id):
     earliest_drinkable_date_bottle = Bottle.query.filter(Bottle.lot_id == lot_id, 
                                                      Bottle.drunk == False
                                                     ).order_by(Bottle.drinkable_date).first()
-    
+
     earliest_drinkable_date_bottle.drunk = True
     db.session.add(earliest_drinkable_date_bottle)
     db.session.commit()

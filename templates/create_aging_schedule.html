@@ -2,13 +2,13 @@
 {% block title %}Add Bottles {% endblock %}
 
 {% block body %}
-<h1>Add bottles of lot.vintage.year lot.wine_name : </h1>
+<h1>Add bottles of {{lot.vintage.year}} {{lot.wine_name}} : </h1>
 Display current aging schedule->
 Display wines with none date to drink 
 <ul>
-for count_per_year in lot_aging_schedule 
-    <li>count_per_year</li>
-
+{% for count_per_year in lot_aging_schedule %} 
+    <li>{{count_per_year[0].year}} : {{count_per_year[1]}} </li>
+{% endfor %}
 </ul>
 
 <form action="/add_bottles/{{lot.lot_id}}" method="POST">
