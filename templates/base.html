@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/x-icon" href="static/imgs/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -18,6 +19,11 @@
 <body>
     <div class="container">
         {% include 'navbar.html' %}
+        <ul class="error">
+            {% for message in get_flashed_messages() %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
         {% block body %}{% endblock %}
 
         {% block after_body %}{% endblock %}

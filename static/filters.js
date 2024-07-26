@@ -1,14 +1,11 @@
 'use strict';
 
-
-console.log('in js')
-
-const varietalFilter = document.getElementById('varietal-filter');
-const countryFilter = document.getElementById('country-filter');
-const regionFilter = document.getElementById('region-filter');
-const vineyardFilter = document.getElementById('vineyard-filter');
-const celebrationFilter = document.getElementById('celebration-filter');
-const vintage = document.getElementById('vintage-filter');
+const varietalFilter = document.querySelector('#varietal');
+const countryFilter = document.querySelector('#country');
+const regionFilter = document.querySelector('#region');
+const vineyardFilter = document.querySelector('#vineyard');
+const celebrationFilter = document.querySelector('#celebration');
+const vintageFilter = document.querySelector('#vintage');
 
 function apply_filters(evt) {
     evt.preventDefault();
@@ -19,16 +16,72 @@ function apply_filters(evt) {
     fetch(url)
         .then(response => response.json())
         .then(res => {
-            console.log(res)
-            document.querySelector('#cellar-lots')
+            document.querySelector('#cellar_lots').innerHTML = '';
+            document.querySelector('#cellar_lots').classList.add("card-columns");
+            document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;
+            
+            res.forEach(lot => {
+                document.querySelector('#cellar_lots').insertAdjacentHTML(
+                    'beforeend', 
+                    `<div class="card" >
+                        <a href='/lots/${lot.lot_id }'>
+                            <img class="card-img-top" src='static/imgs/generic_red.png' alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">${lot.wine_name}</p>
+                                <p class="card-subtitle">${lot.varietal}</p>
+                                <p class="card-text">${new Date(lot.vintage).getFullYear()}</p>
+                            </div>
+                        </a>
+                    </div>`
+                )
+            })
+            document.querySelector(`#${filterItm}`).value=filterItm
         })
 }
 
 
-     const forecast = responseJson.forecast;
-      const temp = responseJson.temp;
-      document.querySelector('#weather-info').innerHTML = `Temperature: ${temp}, Forecast: ${forecast}`
+const filters = [varietalFilter, vintageFilter, celebrationFilter, vineyardFilter, countryFilter, regionFilter];
 
-document.querySelector('#varietal').addEventListener('change', apply_filters)
+filters.forEach(filter => {
+    filter.addEventListener('change', apply_filters);
+});
 
 
+
+
+// --------------------------------------------
+// ------------- Search -----------------------
+// --------------------------------------------
+
+const searchForm = document.querySelector('#searchForm')
+searchForm.addEventListener('submit', searchFilter)
+
+
+function searchFilter(evt){
+    evt.preventDefault()
+    const searchTerm = evt.target[0].value
+    console.log(searchTerm)
+    const url = `/search_cellar?search_term=${searchTerm}`
+
+    fetch(url)  
+        .then(response => response.json())
+        .then(res => {
+            document.querySelector('#cellar_lots').innerHTML = '';
+            document.querySelector('#cellar_lots').classList.add("card-columns");
+            
+            res.forEach(lot => {
+                document.querySelector('#cellar_lots').insertAdjacentHTML(
+                    'beforeend', 
+                    `<div class="card" >
+                        <a href='/lots/${lot.lot_id }'>
+                            <img class="card-img-top" src='static/imgs/generic_red.png' alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">${lot.wine_name}</p>
+                                <p class="card-text">${new Date(lot.vintage).getFullYear()}</p>
+                            </div>
+                        </a>
+                    </div>`
+                )
+            })
+        })    
+}

@@ -14,7 +14,7 @@ Display wines with none date to drink
 <form action="/add_bottles/{{lot.lot_id}}" method="POST">
     {% for i in range(0, bottle_qty) %}
         <li>
-            Year to drink: <input type="integer" name="year"><br>
+            Year to drink: <input type="integer" name="year" pattern="202[3-9]||20[3-9]\d"><br>
         </li>
     {% endfor %}
     <input type="submit">

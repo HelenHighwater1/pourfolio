@@ -1,5 +1,10 @@
 
-    .card-columns {
-        column-count: 6 !important;
-    }
+.card-columns {
+    column-count: 6 !important;
+}
 
+
+.error {
+    color: red;
+    font-weight: bold;
+}

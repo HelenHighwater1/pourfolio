@@ -5,7 +5,7 @@
 <h1>Add to your cellar: </h1>
 
 <form action="/create_lot" method="POST">
-    Wine name <input type="string" name="wine_name"><br>
+    Wine name <input id= "wine_name" type="string" name="wine_name"><br>
     Varietal:
         <select id="varietal" name="varietal">
             {% for varietal in VARIETALS %}
@@ -18,7 +18,7 @@
                 <option value="{{vineyard.vineyard_id}}">{{ vineyard.name }}</option>
             {% endfor %}
         </select><br>
-    Vintage: <input type="integer" name="vintage"><br>
+    Vintage: <input type="integer" name="vintage" pattern="19\d\d|20[0-1]\d||202[0-5]"><br>
     Celebration: <input type="radio" id="true" name="celebration" value="True">
     <label for="true">Yes!</label>
     <input type="radio" id="false" name="celebration" value="False">
@@ -32,7 +32,5 @@
 </form>
 
 <p>TODO make vineyard button a modal? Pop it in by the vineyard within form?</p>
-<p>TODO change drop down to active search input bar thing...</p>
-
 
 {% endblock %}

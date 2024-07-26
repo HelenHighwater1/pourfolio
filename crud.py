@@ -3,7 +3,7 @@
 from model import db, User, Cellar, Lot, Bottle, TastingNote, Vineyard, connect_to_db
 
 
-from sqlalchemy import func
+from sqlalchemy import func, or_
 from datetime import datetime
 
 # -----------------------
@@ -57,19 +57,123 @@ def get_all_cellar_lots(cellar_id):
     
     return all_lots
 
+
+def get_all_drinkable_cellar_lots(cellar_id):
+    all_drinkable_lots = (
+        db.session.query(Lot)
+        .join(Lot.bottles) 
+        .filter(
+            Lot.cellar_id == cellar_id,  
+            Bottle.drinkable_date.isnot(None),  
+            db.extract('year', Bottle.drinkable_date) == datetime.today().year  
+        ).distinct().all()
+    )
+    return all_drinkable_lots
+
+
 def get_cellar_by_id(cellar_id):
     cellar = Cellar.query.get(cellar_id)
     return cellar
 
 
 # -----------------------
-# ----------------------- CELLAR FILTER OPERATIONS -------------------------
+# ----------------------- FILTER CELLAR OPERATIONS -------------------------
 # -----------------------
 
 def filter_cellar_lots(filter_on, filter_val, cellar_id):
-    all_filtered_lots = db.session.query(Lot).filter(Lot.cellar_id == cellar_id).where(getattr(Lot, f'{filter_on}') == filter_val).all()
+    all_filtered_lots = db.session.query(Lot).filter(
+        Lot.cellar_id == cellar_id
+        ).where(getattr(Lot, f'{filter_on}') == filter_val).all()
+    
+    return all_filtered_lots
+
+def filter_cellar_lots_on_vineyard_info(filter_on, filter_val, cellar_id):
+    if filter_on == 'vineyard':
+        filter_on = 'name'
+    all_filtered_lots = db.session.query(Lot).join(Vineyard, Lot.vineyard_id == Vineyard.vineyard_id).filter(
+        Lot.cellar_id == cellar_id,
+        getattr(Vineyard, f'{filter_on}') == filter_val
+    ).all()
 
     return all_filtered_lots
+
+
+def get_all_cellar_varietals(cellar_id):
+    varietal_query = db.session.query(Lot.varietal).filter(
+        Lot.cellar_id == cellar_id
+        ).distinct().all()
+    all_varietals = []
+
+    for varietal in varietal_query:
+        all_varietals.append(varietal[0])
+
+    return all_varietals
+
+def get_all_cellar_vineyards(cellar_id):
+    vineyard_query = db.session.query(
+                        Vineyard.name
+                        ).join(
+                        Lot, Lot.vineyard_id == Vineyard.vineyard_id
+                        ).filter(Lot.cellar_id == cellar_id).distinct().all()
+    all_vineyards = []
+
+    for vineyard in vineyard_query:
+        all_vineyards.append(vineyard[0])
+
+    return all_vineyards
+
+
+def get_all_cellar_countries(cellar_id):
+    country_query = db.session.query(
+                        Vineyard.country
+                        ).join(
+                        Lot, Lot.vineyard_id == Vineyard.vineyard_id
+                        ).filter(Lot.cellar_id == cellar_id).distinct().all()
+    all_countries = []
+
+    for country in country_query:
+        all_countries.append(country[0])
+
+    return all_countries
+
+
+def get_all_cellar_regions(cellar_id):
+    region_query = db.session.query(
+                        Vineyard.region).join(
+                        Lot, Lot.vineyard_id == Vineyard.vineyard_id
+                        ).filter(Lot.cellar_id == cellar_id).distinct().all()
+    all_regions = []
+
+    for region in region_query:
+        all_regions.append(region[0])
+
+    return all_regions
+
+
+def get_all_cellar_vintages(cellar_id):
+    vintage_query = db.session.query(Lot.vintage).filter(
+        Lot.cellar_id == cellar_id
+        ).distinct().all()
+    all_vintages = []
+
+    for vintage in vintage_query:
+        all_vintages.append(vintage[0])
+
+    return all_vintages
+
+
+# -----------------------
+# ----------------------- SEARCH CELLAR OPERATIONS -------------------------
+# -----------------------
+
+def get_lots_by_search_term(cellar_id, search_term):
+    search_results = db.session.query(Lot).join(Vineyard).filter(
+        Lot.cellar_id == cellar_id).where(or_(
+        Vineyard.name.ilike(f"%{search_term}%"),
+        Lot.wine_name.ilike(f"%{search_term}%")
+        )).distinct().all()
+
+    return search_results
 
 
 # -----------------------
@@ -82,7 +186,7 @@ def create_lot(cellar, vineyard, varietal, wine_name, vintage, celebration=False
 
     if not isinstance(vintage, datetime):
         year = int(vintage)
-        vintage = datetime(year = year, day=1, month=1)
+        vintage = datetime(year = year, day=2, month=1)
     
     lot = Lot(cellar=cellar,
               vineyard=vineyard,
@@ -206,14 +310,20 @@ def create_vineyard(name, country, region):
 
     return vineyard
 
+
 def get_all_vineyards():
     all_vineyards = Vineyard.query.all()
     return all_vineyards
+
 
 def get_vineyard_by_id(vineyard_id):
     vineyard = Vineyard.query.get(vineyard_id)
     return vineyard
 
+
+def get_vineyard_by_name(vineyard_name):
+    vineyard = Vineyard.query.filter(Vineyard.name == vineyard_name).first()
+    return vineyard
 
 
 # ----------------------------------------------------------------

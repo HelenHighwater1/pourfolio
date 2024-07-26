@@ -3,18 +3,9 @@
 
 {% block body %}
 <h1>{{ lot.wine_name}} {{ lot.vintage.year }}</h1>
+<h4>{{ lot.vineyard.name }}</h4>
 
-<form action="/cellar">
-    <button type="submit">Back to cellar</button>
-</form>
-<form action="/logout">
-    <button type="submit">Log out</button>
-</form>
-
-
-<p> Bottles available to drink now:
-{{ count_drinkable_bottles }}
-</p>
+<p> Bottles available to drink now:{{ count_drinkable_bottles }}</p>
 
 <p> All Bottles in Cellar: 
     {{ count_all_bottles }}
@@ -24,7 +15,6 @@
     <button type="submit">Drink a bottle</button>
 </form>
 
-<p>TODO catch errors for no-number submission</p>
 <h3>Add bottles to lot</h3>
 <form action='/create_aging_schedule/{{ lot.lot_id }}'>
     Quantity: <input type="integer" name="bottle_qty"><br>

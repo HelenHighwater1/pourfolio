@@ -50,8 +50,7 @@ for n in range(4):
         rand_lot_data = choice(lots_data)
         rand_vineyard = choice(vineyards_in_db)
         rand_year = randint(2000, 2020)
-        # TODO - do I want to save these as integers or years? 
-        rand_vintage = datetime(year=rand_year, month=1, day=1)
+        rand_vintage = datetime(year=rand_year, month=1, day=2)
         
         lot = crud.create_lot(cellar=user.cellar, 
                               varietal=rand_lot_data['varietal'], 
@@ -64,7 +63,7 @@ for n in range(4):
         num_bottles = randint(1, 12)
         for n in range(num_bottles):
             rand_drinkable_year = randint(2024, 2050)
-            drinkable_date = datetime(year=rand_drinkable_year, month=1, day=1)
+            drinkable_date = datetime(year=rand_drinkable_year, month=1, day=2)
             
             bottle = crud.create_bottle(lot=lot,
                                         drinkable_date=drinkable_date,

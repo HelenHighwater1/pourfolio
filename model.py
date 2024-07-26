@@ -2,6 +2,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+from varietals import VARIETALS, VARIETAL_IMG_DICT
+
 db = SQLAlchemy()
 
 
@@ -60,9 +62,14 @@ class Lot(db.Model):
     cellar = db.relationship("Cellar", back_populates="lots")
     vineyard = db.relationship("Vineyard", back_populates="lot")
     bottles = db.relationship("Bottle", back_populates="lot")
+    
+    # def __init__(self):
+    #     self.image = VARIETAL_IMG_DICT[self.varietal]
+    
 
     def __repr__(self):
         return f'<Lot lot_id={self.lot_id} name={self.wine_name} varietal={self.varietal} vintage={self.vintage}, vineyard={self.vineyard_id} celebration={self.celebration}>'
+
 
     def make_dict(self):
         return {
@@ -72,8 +79,12 @@ class Lot(db.Model):
             'varietal': self.varietal, 
             'wine_name': self.wine_name,
             'vintage': self.vintage,
-            'celebration': self.celebration
+            'celebration': self.celebration,
+            'image': self.image
         }
+    
+
+
         
 
 
@@ -114,7 +125,6 @@ class TastingNote(db.Model):
     note = db.Column(db.Text)
     date = db.Column(db.DateTime)
 
-    # TODO - Check singular vs plural
     bottle = db.relationship("Bottle", back_populates="tasting_notes")
     user= db.relationship("User", back_populates="tasting_notes")
 
@@ -142,55 +152,7 @@ class Vineyard(db.Model):
 
 
 
-VARIETALS = wine_varietals = [
-    # Red Wine Varietals
-    "Cabernet Sauvignon",
-    "Merlot",
-    "Pinot Noir",
-    "Syrah/Shiraz",
-    "Bordeaux"
-    "Zinfandel",
-    "Malbec",
-    "Sangiovese",
-    "Grenache",
-    "Tempranillo",
-    "Nebbiolo",
-    "Barbera",
-    "Carmenere",
-    "Petit Verdot",
-    "Mourvedre",
-    "Cabernet Franc",
 
-    # White Wine Varietals
-    "Chardonnay",
-    "Sauvignon Blanc",
-    "Riesling",
-    "Pinot Grigio/Pinot Gris",
-    "Gewürztraminer",
-    "Chenin Blanc",
-    "Moscato/Muscat",
-    "Semillon",
-    "Viognier",
-    "Grüner Veltliner",
-    "Albarino",
-
-
-    # Rosé Wine Varietals
-    "Rose"
-
-    # Sparkling Wine Varietals
-    "Champagne",
-    "Brut",
-    "Blanc de Blancs",
-    "Prosecco",
-    "Moscato",
-
-    # Dessert Wine Varietals
-    "Port",
-    "Sherry",
-    "Sauternes",
-    "Madeira"
-]
 
 
 

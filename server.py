@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify
 from datetime import datetime
-from model import VARIETALS, connect_to_db, db
+from model import connect_to_db, db, VARIETALS
 
 import crud
 
@@ -31,13 +31,14 @@ def login():
             session['user'] = user.user_id
             session['user_name'] = user.user_name
             session['cellar']= user.cellar_id
+            session['current_year'] = datetime.today().year
             flash('logged in!')
             return redirect('/cellar')
         else:
-            #TODO -> Fix this
-            flash('incorrect password')
+  
+            flash('incorrect username/password')
     else:
-        flash('no user with that username')
+        flash('incorrect username/password')
         return redirect('/')
 
 
@@ -76,8 +77,25 @@ def cellar():
     user = crud.get_user_by_id(session['user'])
     
     if user: 
+        varietals = crud.get_all_cellar_varietals(session['cellar'])
+        vintages = crud.get_all_cellar_vintages(session['cellar'])
+        vineyards = crud.get_all_cellar_vineyards(session['cellar'])
+        countries = crud.get_all_cellar_countries(session['cellar'])
+        regions = crud.get_all_cellar_regions(session['cellar'])
         all_cellar_lots = crud.get_all_cellar_lots(session['cellar'])
-        return render_template('cellar.html', user=user, all_cellar_lots=all_cellar_lots, varietals=VARIETALS)
+        all_drinkable_cellar_lots = crud.get_all_drinkable_cellar_lots(session['cellar'])
+        return render_template(
+            'cellar.html', 
+            user = user, 
+            all_cellar_lots = all_cellar_lots,
+            all_drinkable_cellar_lots= all_drinkable_cellar_lots,
+            varietals = varietals,
+            vintages = vintages, 
+            vineyards = vineyards, 
+            countries = countries, 
+            regions = regions
+            )
+    
     else: 
         return redirect('/')
     
@@ -98,9 +116,27 @@ def filter_cellar():
     filter_on = request.args.get('filter_on')
     filter_val = request.args.get('filter_val')
     cellar_id = session['cellar']
-    filtered_lots = crud.filter_cellar_lots(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
+
+    if filter_on in ('vineyard', 'region', 'country'):
+        filtered_lots = crud.filter_cellar_lots_on_vineyard_info(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
+    else:
+        filtered_lots = crud.filter_cellar_lots(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
+
     dict_lots = []
     for lot in filtered_lots:
+        dict_lots.append(lot.make_dict())
+
+    return jsonify(dict_lots)
+
+
+@app.route('/search_cellar')
+def search_cellar():
+    search_term = request.args.get('search_term')
+    cellar_id = session['cellar']
+    search_results = crud.get_lots_by_search_term(cellar_id=cellar_id, search_term=search_term)
+
+    dict_lots = []
+    for lot in search_results:
         dict_lots.append(lot.make_dict())
 
     return jsonify(dict_lots)
@@ -148,9 +184,10 @@ def create_lot():
               vintage=vintage,
               celebration=celebration
               )
-    
-    return redirect(url_for('create_aging_lot', lot_id=lot.lot_id, bottle_qty=bottle_qty))
-
+    if bottle_qty:
+        return redirect(url_for('create_aging_lot', lot_id=lot.lot_id, bottle_qty=bottle_qty))
+    else: 
+        return redirect(f'/lots/{lot.lot_id}')
 
 # -----------------------
 # ----------------------- BOTTLE ROUTES -----------------------
@@ -166,7 +203,9 @@ def drink_bottle(lot_id):
 
 @app.route('/create_aging_schedule/<lot_id>')
 def create_aging_lot(lot_id):
-    #TODO -> catch errors when number blank
+    if not request.args['bottle_qty'] or not request.args['bottle_qty'].isdigit():
+        flash('Invalid or missing bottle quantity parameter.')
+        return redirect(f'/lots/{lot_id}')
     lot_aging_schedule = crud.get_lot_aging_schedule(lot_id)
     lot = crud.get_lot_by_id(lot_id) 
     bottle_qty = int(request.args['bottle_qty'])
@@ -178,7 +217,7 @@ def add_bottles_to_lot(lot_id):
     lot = crud.get_lot_by_id(lot_id)
     all_years = request.form.getlist('year')
     for year in all_years:
-        drinkable_date = datetime(year=int(year), month=1, day=1)
+        drinkable_date = datetime(year=int(year), month=1, day=2)
         bottle = crud.create_bottle(lot=lot, drinkable_date=drinkable_date, purchase_date = datetime.today(), price=0)
     return redirect(f'/lots/{lot_id}')
 
@@ -218,6 +257,9 @@ def add_vineyard():
 @app.route('/create_vineyard', methods=['POST'])
 def create_vineyard():
     name = request.form['vineyard_name'].strip().capitalize()
+    if crud.get_vineyard_by_name(name):
+        flash('Vineyard already exists.')
+        return redirect('/add_to_cellar')
     region = request.form['region'].strip().capitalize()
     country = request.form['country'].strip().capitalize()
 
