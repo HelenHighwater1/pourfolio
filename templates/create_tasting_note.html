@@ -10,7 +10,10 @@
 </form>
 
 <form action="/lots/{{bottle.lot_id}}">
-    <button type="submit">meh - I dont need to make a tasting note today</button>
+    <button type="submit">Skip the tasting note</button>
+</form>
+<form action="/undo_drink_bottle/{{bottle.bottle_id}}">
+    <button type="submit">Undo drink bottle</button>
 </form>
 
 {% endblock %}

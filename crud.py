@@ -81,6 +81,11 @@ def get_cellar_by_id(cellar_id):
 # -----------------------
 
 def filter_cellar_lots(filter_on, filter_val, cellar_id):
+    if filter_on == 'celebration':
+        if filter_val == 'True':
+            filter_val = True
+        else: 
+            filter_val = False
     all_filtered_lots = db.session.query(Lot).filter(
         Lot.cellar_id == cellar_id
         ).where(getattr(Lot, f'{filter_on}') == filter_val).all()
@@ -90,15 +95,12 @@ def filter_cellar_lots(filter_on, filter_val, cellar_id):
 def filter_cellar_lots_on_vineyard_info(filter_on, filter_val, cellar_id):
     if filter_on == 'vineyard':
         filter_on = 'name'
-    print('PPPPPPPPPPPPPPPPPPP')
-    print(filter_on)
+
     all_filtered_lots = db.session.query(Lot).join(Vineyard, Lot.vineyard_id == Vineyard.vineyard_id).filter(
         Lot.cellar_id == cellar_id,
         getattr(Vineyard, f'{filter_on}') == filter_val
     ).all()
-    print('MMMMMMMMMMMMMMMM')
 
-    print(all_filtered_lots)
     return all_filtered_lots
 
 
@@ -313,6 +315,20 @@ def create_vineyard(name, country, region):
     db.session.commit()
 
     return vineyard
+
+
+def update_vineyard(vineyard_id, name, country, region):
+    """Updates an existing vineyard."""
+    
+    vineyard = Vineyard.query.get(vineyard_id)
+    if vineyard:
+        vineyard.name = name
+        vineyard.country = country
+        vineyard.region = region
+        
+        db.session.commit()
+    return vineyard
+
 
 
 def get_all_vineyards():

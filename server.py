@@ -37,6 +37,7 @@ def login():
         else:
   
             flash('incorrect username/password')
+            return redirect('/')
     else:
         flash('incorrect username/password')
         return redirect('/')
@@ -113,13 +114,10 @@ def add_to_cellar():
 
 @app.route('/filter_cellar')
 def filter_cellar():
-    print('#########')
-    print("in filter cellar")
     filter_on = request.args.get('filter_on')
     filter_val = request.args.get('filter_val')
     cellar_id = session['cellar']
-    print(filter_on)
-    print(filter_val)
+
     if filter_on in ('vineyard', 'region', 'country'):
         filtered_lots = crud.filter_cellar_lots_on_vineyard_info(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
     else:
@@ -224,7 +222,11 @@ def add_bottles_to_lot(lot_id):
         bottle = crud.create_bottle(lot=lot, drinkable_date=drinkable_date, purchase_date = datetime.today(), price=0)
     return redirect(f'/lots/{lot_id}')
 
-
+@app.route('/undo_drink_bottle/<bottle_id>', methods=["POST"])
+def undo_drink_bottle(bottle_id):
+    bottle = crud.get_bottle_by_id(bottle_id)
+    bottle.drunk = False
+    return redirect(f'/lots/{bottle.lot_id}')
 
 
 # -----------------------
@@ -275,7 +277,24 @@ def create_vineyard():
     
     return redirect('/add_to_cellar')
 
+@app.route('/edit_vineyard/<vineyard_id>', methods=['GET'])
+def edit_vineyard(vineyard_id):
+    """TODO make description..."""
+    vineyard = crud.get_vineyard_by_id(vineyard_id) 
+    
+    return render_template('edit_vineyard.html', vineyard=vineyard)
 
+
+@app.route('/update_vineyard/<int:vineyard_id>', methods=['POST'])
+def update_vineyard(vineyard_id):
+    """Updates an existing vineyard."""
+    name = request.form['vineyard_name'].strip().capitalize()
+    region = request.form['region'].strip().capitalize()
+    country = request.form['country'].strip().capitalize()
+
+    crud.update_vineyard(vineyard_id, name, country, region)
+
+    return redirect('/cellar')
 
 # ----------------------------------------------------------------
 # -----------------------------------------------------------------

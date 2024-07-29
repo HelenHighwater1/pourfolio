@@ -73,6 +73,7 @@ class Lot(db.Model):
             'lot_id': self.lot_id,
             'cellar_id': self.cellar_id,
             'vineyard_id': self.vineyard_id,
+            'vineyard_name': self.vineyard.name,
             'varietal': self.varietal, 
             'wine_name': self.wine_name,
             'vintage': self.vintage,
