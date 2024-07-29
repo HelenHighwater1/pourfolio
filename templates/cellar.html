@@ -63,7 +63,7 @@
         {% for lot in all_cellar_lots %}
         <div class="card" >
             <a href='/lots/{{ lot.lot_id }}'>
-            <img class="card-img-top" src='static/imgs/generic_red.png' alt="Card image cap">
+            <img class="card-img-top" src='{{ lot.image() }}' alt="Card image cap">
             <div class="card-body">
                 <p class="card-title">{{ lot.wine_name }}</p>
                 <p class="card-subtitle">{{ lot.vineyard.name }}, {{ lot.varietal }}</p>

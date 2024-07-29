@@ -11,11 +11,16 @@ function apply_filters(evt) {
     evt.preventDefault();
     const filterItm = evt.target.id
     const filterVal = evt.target.value
+    console.log('XXXXXXXXXXXXXX')
+    console.log(filterItm)
+    console.log(filterVal)
     const url = `/filter_cellar?filter_on=${filterItm}&filter_val=${filterVal}`
 
     fetch(url)
         .then(response => response.json())
         .then(res => {
+            console.log('#########')
+            console.log(res)
             document.querySelector('#cellar_lots').innerHTML = '';
             document.querySelector('#cellar_lots').classList.add("card-columns");
             document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;
@@ -25,7 +30,7 @@ function apply_filters(evt) {
                     'beforeend', 
                     `<div class="card" >
                         <a href='/lots/${lot.lot_id }'>
-                            <img class="card-img-top" src='static/imgs/generic_red.png' alt="Card image cap">
+                            <img class="card-img-top" src='${lot.image}' alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-title">${lot.wine_name}</p>
                                 <p class="card-subtitle">${lot.varietal}</p>
@@ -60,6 +65,7 @@ searchForm.addEventListener('submit', searchFilter)
 function searchFilter(evt){
     evt.preventDefault()
     const searchTerm = evt.target[0].value
+    console.log('XXXXXXXXXXXXXX')
     console.log(searchTerm)
     const url = `/search_cellar?search_term=${searchTerm}`
 

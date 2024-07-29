@@ -113,15 +113,18 @@ def add_to_cellar():
 
 @app.route('/filter_cellar')
 def filter_cellar():
+    print('#########')
+    print("in filter cellar")
     filter_on = request.args.get('filter_on')
     filter_val = request.args.get('filter_val')
     cellar_id = session['cellar']
-
+    print(filter_on)
+    print(filter_val)
     if filter_on in ('vineyard', 'region', 'country'):
         filtered_lots = crud.filter_cellar_lots_on_vineyard_info(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
     else:
         filtered_lots = crud.filter_cellar_lots(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
-
+    
     dict_lots = []
     for lot in filtered_lots:
         dict_lots.append(lot.make_dict())

@@ -90,11 +90,15 @@ def filter_cellar_lots(filter_on, filter_val, cellar_id):
 def filter_cellar_lots_on_vineyard_info(filter_on, filter_val, cellar_id):
     if filter_on == 'vineyard':
         filter_on = 'name'
+    print('PPPPPPPPPPPPPPPPPPP')
+    print(filter_on)
     all_filtered_lots = db.session.query(Lot).join(Vineyard, Lot.vineyard_id == Vineyard.vineyard_id).filter(
         Lot.cellar_id == cellar_id,
         getattr(Vineyard, f'{filter_on}') == filter_val
     ).all()
+    print('MMMMMMMMMMMMMMMM')
 
+    print(all_filtered_lots)
     return all_filtered_lots
 
 

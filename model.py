@@ -63,9 +63,6 @@ class Lot(db.Model):
     vineyard = db.relationship("Vineyard", back_populates="lot")
     bottles = db.relationship("Bottle", back_populates="lot")
     
-    # def __init__(self):
-    #     self.image = VARIETAL_IMG_DICT[self.varietal]
-    
 
     def __repr__(self):
         return f'<Lot lot_id={self.lot_id} name={self.wine_name} varietal={self.varietal} vintage={self.vintage}, vineyard={self.vineyard_id} celebration={self.celebration}>'
@@ -80,12 +77,15 @@ class Lot(db.Model):
             'wine_name': self.wine_name,
             'vintage': self.vintage,
             'celebration': self.celebration,
-            'image': self.image
+            'image': VARIETAL_IMG_DICT[self.varietal]
         }
     
-
-
-        
+    def image(self):
+        if self.varietal in VARIETAL_IMG_DICT:
+            return VARIETAL_IMG_DICT[self.varietal]
+        else:
+            return 'static/imgs/generic_red.png'
+    
 
 
 class Bottle(db.Model):
