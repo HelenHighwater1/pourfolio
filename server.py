@@ -222,6 +222,7 @@ def add_bottles_to_lot(lot_id):
         bottle = crud.create_bottle(lot=lot, drinkable_date=drinkable_date, purchase_date = datetime.today(), price=0)
     return redirect(f'/lots/{lot_id}')
 
+
 @app.route('/undo_drink_bottle/<bottle_id>', methods=["POST"])
 def undo_drink_bottle(bottle_id):
     bottle = crud.get_bottle_by_id(bottle_id)
@@ -259,6 +260,12 @@ def add_vineyard():
     return render_template('create_vineyard.html')
 
 
+@app.route('/vineyards')
+def vineyards():
+    all_vineyards = crud.get_all_vineyards()
+    return render_template('vineyards.html', all_vineyards=all_vineyards)
+
+
 @app.route('/create_vineyard', methods=['POST'])
 def create_vineyard():
     name = request.form['vineyard_name'].strip().capitalize()
@@ -292,9 +299,10 @@ def update_vineyard(vineyard_id):
     region = request.form['region'].strip().capitalize()
     country = request.form['country'].strip().capitalize()
 
-    crud.update_vineyard(vineyard_id, name, country, region)
-
-    return redirect('/cellar')
+    updated = crud.update_vineyard(vineyard_id, name, country, region)
+    if updated: 
+        flash('successfully updated!')
+    return redirect('/vineyards')
 
 # ----------------------------------------------------------------
 # -----------------------------------------------------------------

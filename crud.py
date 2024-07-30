@@ -326,6 +326,7 @@ def update_vineyard(vineyard_id, name, country, region):
         vineyard.country = country
         vineyard.region = region
         
+
         db.session.commit()
     return vineyard
 

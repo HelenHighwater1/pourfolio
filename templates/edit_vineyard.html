@@ -4,7 +4,7 @@
 {% block body %}
 <h1>Edit {{vineyard.name}} </h1>
 
-<form action="/create_vineyard" method="POST">
+<form action="/update_vineyard/{{vineyard.vineyard_id}}" method="POST">
     Vineyard name: <input type="string" name="vineyard_name" value="{{vineyard.name}}"><br>
     Region:<input type="string" name="region" value ="{{vineyard.region}}"><br>
     Country: <input type="string" name="country" value="{{vineyard.country}}"><br>   
