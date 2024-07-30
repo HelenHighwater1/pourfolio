@@ -151,6 +151,14 @@ class Vineyard(db.Model):
     def __repr__(self):
         return f'<Vineyard vineyard_id={self.vineyard_id} name={self.name} region={self.region} country={self.country}>'
 
+    def make_dict(self):
+        return {
+            'vineyard_id': self.vineyard_id,
+            'name': self.name,
+            'country': self.country,
+            'refion': self.region
+        }
+    
 
 
 

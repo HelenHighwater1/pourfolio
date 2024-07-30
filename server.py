@@ -262,8 +262,16 @@ def add_vineyard():
 
 @app.route('/vineyards')
 def vineyards():
-    all_vineyards = crud.get_all_vineyards()
-    return render_template('vineyards.html', all_vineyards=all_vineyards)
+    return render_template('vineyards.html')
+
+
+@app.route('/api/get_vineyards')
+def get_vineyards():
+    all_vineyards_query = crud.get_all_vineyards()
+    all_vineyards = []
+    for vineyard in all_vineyards_query: 
+        all_vineyards.append(vineyard.make_dict())
+    return jsonify(all_vineyards)
 
 
 @app.route('/create_vineyard', methods=['POST'])

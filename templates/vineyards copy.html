@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Vineyards{% endblock %}
+
+{% block body %}
+<h3> Vineyards: </h3>
+
+{% if all_vineyards %}
+    <ul>
+        {% for vineyard in all_vineyards %}
+        <li>
+            {{vineyard.name}}: {{vineyard.region}}, {{vineyard.country}}
+            <form action="/edit_vineyard/{{vineyard.vineyard_id}}">
+                <button type="submit">Edit</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+    <p>Uh-oh - you have nothing in your cellar.</p>
+{% endif %}
+
+<script src="/static/filters.js"></script>
+{% endblock %}
