@@ -156,7 +156,7 @@ class Vineyard(db.Model):
             'vineyard_id': self.vineyard_id,
             'name': self.name,
             'country': self.country,
-            'refion': self.region
+            'region': self.region
         }
     
 

@@ -17,7 +17,6 @@ function apply_filters(evt) {
     fetch(url)
         .then(response => response.json())
         .then(res => {
-            console.log(res)
             document.querySelector('#cellar_lots').innerHTML = '';
             document.querySelector('#cellar_lots').classList.add("card-columns");
             document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;

@@ -9,3 +9,38 @@
     font-weight: bold;
 }
 
+.modal {
+    display: flex !important;
+    position: fixed !important;
+    z-index: 1 !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(45, 203, 13);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    z-index: 100;
+    padding: 20px;
+    border-radius: 4px;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

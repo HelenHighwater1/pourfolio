@@ -284,7 +284,7 @@ def create_vineyard():
     country = request.form['country'].strip().capitalize()
 
 
-    lot = crud.create_vineyard(
+    vineyard = crud.create_vineyard(
               name=name,
               region=region,
               country=country
@@ -294,7 +294,7 @@ def create_vineyard():
 
 @app.route('/edit_vineyard/<vineyard_id>', methods=['GET'])
 def edit_vineyard(vineyard_id):
-    """TODO make description..."""
+    """Edits vineyard by searching for the ID and rendering an edit form."""
     vineyard = crud.get_vineyard_by_id(vineyard_id) 
     
     return render_template('edit_vineyard.html', vineyard=vineyard)
@@ -303,14 +303,17 @@ def edit_vineyard(vineyard_id):
 @app.route('/update_vineyard/<int:vineyard_id>', methods=['POST'])
 def update_vineyard(vineyard_id):
     """Updates an existing vineyard."""
-    name = request.form['vineyard_name'].strip().capitalize()
-    region = request.form['region'].strip().capitalize()
-    country = request.form['country'].strip().capitalize()
-
+    name = request.json['name'].strip().capitalize()
+    region = request.json['region'].strip().capitalize()
+    country = request.json['country'].strip().capitalize()
     updated = crud.update_vineyard(vineyard_id, name, country, region)
+
     if updated: 
-        flash('successfully updated!')
-    return redirect('/vineyards')
+        vineyard = updated.make_dict()
+        return jsonify(vineyard)
+    else:
+        flash('Error updating vineyard')
+        return 400
 
 # ----------------------------------------------------------------
 # -----------------------------------------------------------------
