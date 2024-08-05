@@ -86,11 +86,3 @@ function Vineyards() {
 }
 
 ReactDOM.render(<Vineyards />, document.querySelector('#vineyards'));
-
-// document.querySelector('#editbtn').addEventListener("click", function() {
-//   document.querySelector('.modal').style.display = "flex";
-// });
-
-// document.querySelector('.close').addEventListener("click", function() {
-//   document.querySelector('.modal').style.display = "none";
-// });

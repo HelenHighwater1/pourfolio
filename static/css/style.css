@@ -1,8 +1,56 @@
-
-.card-columns {
-    column-count: 6 !important;
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "Libre Franklin";
+    font-weight: 100 !important;
 }
 
+body {
+    font-family: "Libre Franklin" !important;
+}
+
+.container {
+    margin: 10px;
+    padding:10px;
+}
+a {
+    color: darkslategray !important;
+    border-color: none !important;
+}
+
+#cellar-div {
+    display:flex;
+}
+
+#cellar-filters {
+    margin: 10px;
+    padding: 10px;
+
+
+}
+
+.card-columns {
+    column-count: 5 !important;
+}
+
+/* .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+} */
+
+.card {
+    height: 400px;
+    border-radius: 10px !important;
+}
+
+.card img {
+    border-radius: 10px !important;
+}
+
+.card-title {
+    font-size: medium;
+}
+.card-subtitle{
+    font-size: small;
+}
 
 .error {
     color: red;
