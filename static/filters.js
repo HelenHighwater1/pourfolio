@@ -16,11 +16,11 @@ function apply_filters(evt) {
 
     fetch(url)
         .then(response => response.json())
-        .then(res => {
+        .then(res => {    
             document.querySelector('#cellar_lots').innerHTML = '';
             document.querySelector('#cellar_lots').classList.add("card-columns");
             document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;
-            
+         
             res.forEach(lot => {
                 document.querySelector('#cellar_lots').insertAdjacentHTML(
                     'beforeend', 
@@ -30,7 +30,7 @@ function apply_filters(evt) {
                             <div class="card-body">
                                 <p class="card-title">${lot.wine_name}</p>
                                 <p class="card-subtitle">${lot.vineyard_name}, ${lot.varietal}</p>
-                                <p class="card-text">${new Date(lot.vintage).getFullYear()}</p>
+                                <p class="card-subtitle">${new Date(lot.vintage).getFullYear()}</p>
                             </div>
                         </a>
                     </div>`

@@ -1,5 +1,5 @@
 {% if 'user' in session %}
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="color: whitesmoke">
+<nav class="navbar  navbar-expand-lg navbar-dark navbar-custom" style="color: whitesmoke;">
     <h2 class="mx-3">{{ session['user_name'] }}'s Cellar</h2>
 
 
@@ -9,7 +9,7 @@
                 <a class="nav-link" href="/cellar">Cellar View</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/add_to_cellar">Add Lot to Cellar</a>
+                <a class="nav-link" href="/add_to_cellar">Add New</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>

@@ -8,9 +8,23 @@ body {
     /* background-color: whitesmoke !important; */
 }
 
+.nav-item {
+    width: 100px;
+}
+
 .nav-item a {
     color: whitesmoke !important;
 }
+
+.nav-item a:hover {
+    color: rgba(245, 245, 245, 0.885) !important;
+    font-weight: 200;
+}
+
+.navbar-custom {
+    background-color: rgb(37, 90, 109) !important;
+}
+
 .container {
     margin: 10px;
     padding:10px;
@@ -95,4 +109,10 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#celar-filters select {
+    display: block;
+    align-items: stretch;
+    justify-content: stretch;
 }

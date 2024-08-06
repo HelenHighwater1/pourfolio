@@ -6,41 +6,42 @@
 <div id="cellar-div">
     <div id="cellar-filters">
         <h4>Filter by:</h4>
+            <div id="filtered-by"></div>
                 <select id="varietal">with
                     <option  value="varietal">Varietal</option>
                         {% for item in varietals %}
                             <option id="varietal" value="{{ item }}">{{ item }}</option>
                         {% endfor %}
                 </select>
-
+                <br>
                 <select id="vineyard">
                     <option  value="vineyard">Vineyard</option>
                         {% for item in vineyards %}
                             <option id="vineyard" value="{{ item }}">{{ item }}</option>
                         {% endfor %}
                 </select>
-
+                <br>
                 <select id="country">
                     <option  value="country">Country</option>
                         {% for item in countries %}
                             <option id="country" value="{{ item }}">{{ item }}</option>
                         {% endfor %}
                 </select>
-
+                <br>
                 <select id="region">
                     <option  value="region">Region</option>
                         {% for item in regions %}
                             <option id="region" value="{{ item }}">{{ item }}</option>
                         {% endfor %}
                 </select>
-
+                <br>
                 <select id="vintage">
                     <option value="vintage">Vintage</option>
                     {% for item in vintages %}
                     <option id="vintage" value="{{ item }}">{{ item.year }}</option>
                     {% endfor %}
                 </select>
-
+                <br>
                 <select id="celebration">
                     <option value="celebration">Celebration</option>
                     <option id="celebration" value="True">True</option>
@@ -48,23 +49,25 @@
                 </select>
 
     </div>
-
-    <div id='cellar_lots'>
-    {% if all_drinkable_cellar_lots %}
-        <div class="card-columns" id="cellar-lots">
-            {% for lot in all_cellar_lots %}
-            <div class="card" >
-                <a href='/lots/{{ lot.lot_id }}'>
-                <img class="card-img-top" src='{{ lot.image() }}' alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-title">{{ lot.wine_name }}</p>
-                    <p class="card-subtitle">{{ lot.vineyard.name }}, {{ lot.varietal }}</p>
-                    <p class="card-subtitle">{{ lot.vintage.year }}</p>
+    <div id="cellar-main">
+        <div id="cellar_lots">
+        {% if all_drinkable_cellar_lots %}
+            <div class="card-columns">
+                {% for lot in all_cellar_lots %}
+                <div class="card" >
+                    <a href='/lots/{{ lot.lot_id }}'>
+                    <img class="card-img-top" src='{{ lot.image() }}' alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-title">{{ lot.wine_name }}</p>
+                        <p class="card-subtitle">{{ lot.vineyard.name }}, {{ lot.varietal }}</p>
+                        <p class="card-subtitle">{{ lot.vintage.year }}</p>
+                    </div>
+                    </a>
                 </div>
-                </a>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+    </div>
 </div>
 {% else %}
     <p>Uh-oh - you have nothing in your cellar.</p>

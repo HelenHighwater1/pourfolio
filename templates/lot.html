@@ -6,18 +6,23 @@
 
     <div style="display: flex; flex-direction: row; width: 100%; justify-content:stretch; margin: 20px;">
         <div style="margin:10px;">
-            <img style="width:200px" src='/{{ lot.image() }}' alt="wine image ">
+            <img style="width:200px; border-radius: 10px;" src='/{{ lot.image() }}' alt="wine image ">
         </div>
-        <div style="margin:10px; border:solid; border-color: blue;">
-            <h4>{{ lot.wine_name}}, {{ lot.vintage.year }} </h4>
-            <form action='/drink/{{ lot.lot_id }}'>
-                <button type="submit">Drink a bottle</button>
-            </form>
-            <div style="margin:10px; display: flex; flex-direction: row; border:solid; border-color:red">
-                <form action='/create_aging_schedule/{{ lot.lot_id }}'>
-                    <button type="submit">Add bottles</button>
-                    Quantity: <input type="integer" name="bottle_qty">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; margin:10px;">
+            <div>
+                <h2>{{ lot.wine_name}} </h2>
+                <h4>{{ lot.vintage.year }} </h4>
+            </div>
+            <div style="padding-bottom: 20px;">
+                <form style="margin:10px;" action='/drink/{{ lot.lot_id }}'>
+                    <button type="submit">Drink a bottle</button>
                 </form>
+                <div style="margin:10px; display: flex; flex-direction: row;">
+                    <form action='/create_aging_schedule/{{ lot.lot_id }}'>
+                        <button type="submit">Add bottles</button>
+                        Quantity: <input type="integer" name="bottle_qty">
+                    </form>
+                </div>
             </div>
         </div>
         <div  style="margin:10px;">
