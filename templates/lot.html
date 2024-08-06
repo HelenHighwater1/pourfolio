@@ -2,37 +2,47 @@
 {% block title %}{{lot.wine_name}}{% endblock %}
 
 {% block body %}
-<h1>{{ lot.wine_name}} {{ lot.vintage.year }}</h1>
-<h4>{{ lot.vineyard.name }}</h4>
+<div style="display: flex; flex-direction: column;">
 
-<p> Bottles available to drink now:{{ count_drinkable_bottles }}</p>
+    <div style="display: flex; flex-direction: row; width: 100%; justify-content:stretch; margin: 20px;">
+        <div style="margin:10px;">
+            <img style="width:200px" src='/{{ lot.image() }}' alt="wine image ">
+        </div>
+        <div style="margin:10px; border:solid; border-color: blue;">
+            <h4>{{ lot.wine_name}}, {{ lot.vintage.year }} </h4>
+            <form action='/drink/{{ lot.lot_id }}'>
+                <button type="submit">Drink a bottle</button>
+            </form>
+            <div style="margin:10px; display: flex; flex-direction: row; border:solid; border-color:red">
+                <form action='/create_aging_schedule/{{ lot.lot_id }}'>
+                    <button type="submit">Add bottles</button>
+                    Quantity: <input type="integer" name="bottle_qty">
+                </form>
+            </div>
+        </div>
+        <div  style="margin:10px;">
+            <h4> {{ lot.vineyard.name }} Vineyard</h4>
+            <p> Bottles available to drink now:{{ count_drinkable_bottles }}</p>
+            
+            <p> All Bottles in Cellar:
+                {{ count_all_bottles }}
+            </p>
 
-<p> All Bottles in Cellar: 
-    {{ count_all_bottles }}
-</p>
+        </div>
+    </div>
 
-<form action='/drink/{{ lot.lot_id }}' >
-    <button type="submit">Drink a bottle</button>
-</form>
+    <div>
+        <p>tasting notes:</p>
+        
+        <ul>
+            {% for note in all_tasting_notes %}
+            <li>
+                {{ note.date.month }}, {{ note.date.year }}<br>
+                {{ note.note }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-<h3>Add bottles to lot</h3>
-<form action='/create_aging_schedule/{{ lot.lot_id }}'>
-    Quantity: <input type="integer" name="bottle_qty"><br>
-    <button type="submit">Add bottles</button>
-</form>
-
-<br>
-
-<p>tasting notes:</p>
-
-<ul>
-    {% for note in all_tasting_notes %}
-    <li>
-        {{ note.date.month }}, {{ note.date.year }}<br>
-        {{ note.note }}
-    </li>
-    {% endfor %}
-</ul>
-
-
+</div>
 {% endblock %}

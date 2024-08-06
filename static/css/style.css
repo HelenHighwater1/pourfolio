@@ -5,16 +5,17 @@ h1, h2, h3, h4, h5, h6, p {
 
 body {
     font-family: "Libre Franklin" !important;
+    /* background-color: whitesmoke !important; */
 }
 
 .container {
     margin: 10px;
     padding:10px;
+    background-color: whitesmoke;
 }
-a {
-    color: darkslategray !important;
-    border-color: none !important;
-}
+/* a {
+    color: rgb(47, 79, 50) !important;
+} */
 
 #cellar-div {
     display:flex;
@@ -43,6 +44,7 @@ a {
 
 .card img {
     border-radius: 10px !important;
+
 }
 
 .card-title {
@@ -66,7 +68,6 @@ a {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(45, 203, 13);
     justify-content: center;
     align-items: center;
 }
