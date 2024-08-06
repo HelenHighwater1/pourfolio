@@ -8,6 +8,9 @@ body {
     /* background-color: whitesmoke !important; */
 }
 
+.nav-item a {
+    color: whitesmoke !important;
+}
 .container {
     margin: 10px;
     padding:10px;
