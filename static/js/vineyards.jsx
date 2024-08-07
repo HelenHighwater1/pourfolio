@@ -23,14 +23,47 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
   return (
     <div className="modal">
       <div className="modal-content">
-      <span className="close" onClick={closeModal}>&times;</span>
-      <h1>Edit {vineyard.name}</h1>
-      <form onSubmit={handleSubmit}>
-        Vineyard name: <input type="text" name='name' value={name} onChange={evt => setName(evt.target.value)} /><br />
-        Region: <input type="text" name='region' value={region} onChange={evt => setRegion(evt.target.value)} /><br />
-        Country: <input type="text" name='country' value={country} onChange={evt => setCountry(evt.target.value)} /><br />
-        <button type="submit">Save</button>
-      </form>
+        <span className="close" onClick={closeModal}>&times;</span>
+        <h4>Edit {vineyard.name}</h4>
+          <form onSubmit={handleSubmit}>
+            <div class="form-line">
+              <label htmlFor="name">Vineyard Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={evt => setName(evt.target.value)}
+                placeholder="Enter vineyard name"
+              />
+            </div>
+            <div class="form-line">
+              <label htmlFor="region">Region:</label>
+              <input
+                type="text"
+                id="region"
+                name="region"
+                value={region}
+                onChange={evt => setRegion(evt.target.value)}
+                placeholder="Enter region"
+              />
+            </div>
+            <div class="form-line">
+              <label htmlFor="country">Country:</label>
+              <input
+                type="text"
+                id="country"
+                name="country"
+                value={country}
+                onChange={evt => setCountry(evt.target.value)}
+                placeholder="Enter country"
+              />
+            </div>
+            <div class="form-line">
+              <button type="submit">Save</button>
+            </div>
+          </form>
+
       </div>
     </div>
   );
@@ -65,11 +98,11 @@ function Vineyards() {
  
   return (
     <div>
-        <ul>
+        <ul className="vineyard-list">
             {vineyards.map(vineyard => {
-                return(<li key={vineyard.vineyard_id}>
+                return(<li className="vineyard-item" key={vineyard.vineyard_id}>
                     {vineyard.name}: {vineyard.region}, {vineyard.country}   
-                    <button id="editbtn" onClick={() => openModal(vineyard)}>Edit</button>
+                    <button ClassName="vineyard-edit-button" onClick={() => openModal(vineyard)}>Edit</button>
                 </li>)
             })}
         </ul>

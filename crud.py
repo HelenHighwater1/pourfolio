@@ -334,7 +334,7 @@ def update_vineyard(vineyard_id, name, country, region):
 
 
 def get_all_vineyards():
-    all_vineyards = Vineyard.query.all()
+    all_vineyards = Vineyard.query.order_by(Vineyard.name).all()
     return all_vineyards
 
 

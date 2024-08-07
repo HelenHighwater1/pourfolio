@@ -8,6 +8,15 @@ body {
     /* background-color: whitesmoke !important; */
 }
 
+.container {
+    margin: 10px;
+    padding: 10px;
+    background-color: whitesmoke;
+}
+
+/* NAVBAR */
+
+
 .nav-item {
     width: 100px;
 }
@@ -37,42 +46,8 @@ body {
     color: whitesmoke
 }
 
-.container {
-    margin: 10px;
-    padding:10px;
-    background-color: whitesmoke;
-}
-/* a {
-    color: rgb(47, 79, 50) !important;
-} */
 
-#cellar-div {
-    display:flex;
-}
-
-#cellar-filters {
-    margin: 10px;
-    padding: 10px;
-
-
-}
-
-.card-columns {
-    column-count: 5 !important;
-}
-
-
-.filter-items select {
-    width: 100%;
-    min-width: 175px;
-    background-color: white !important;
-    border-radius: 5px;
-    margin: 5px !important;
-    padding: 4px;
-
-}
-
-
+/* BUTTONS */
 button {
     padding: 5px;
     margin: 5px;
@@ -93,14 +68,16 @@ button:focus {
     color: whitesmoke;
 }
 
+
+/* CARDS */
+
+.card-columns {
+    column-count: 5 !important;
+}
+
 #notes-grid .card-columns {
     column-count: 3 !important;
 }
-
-/* .card-img-top {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-} */
 
 .card {
     height: 400px;
@@ -120,10 +97,9 @@ button:focus {
     font-size: small;
 }
 
-.error {
-    color: red;
-    font-weight: bold;
-}
+
+
+/* MODAL */
 
 .modal {
     display: flex !important;
@@ -141,14 +117,15 @@ button:focus {
 .modal-content {
     background-color: #fff;
     z-index: 100;
-    padding: 20px;
+    padding: 30px;
     border-radius: 4px;
-    width: 50%;
+    width: 50% !important;
 }
 
 .close {
     color: #aaa;
-    float: right;
+    display: flex;
+    align-self: end !important;
     font-size: 28px;
     font-weight: bold;
 }
@@ -160,8 +137,107 @@ button:focus {
     cursor: pointer;
 }
 
+
+/* CELLAR: */
+
+#cellar-div {
+    display: flex;
+}
+
+#cellar-filters {
+    margin: 10px;
+    padding: 10px;
+}
+
 #celar-filters select {
     display: block;
     align-items: stretch;
     justify-content: stretch;
+}
+
+.filter-items select {
+    width: 100%;
+    min-width: 175px;
+    background-color: white !important;
+    border-radius: 5px;
+    margin: 5px !important;
+    padding: 4px;
+
+}
+
+/* Vineyard */
+
+.vineyard-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.vineyard-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vineyard-edit-button {
+    background-color: rgb(57, 136, 170);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+/* FORMS */
+
+/* .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+} */
+
+.form-line {
+    margin-bottom: 15px;
+}
+
+.form-line label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-line input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-line button {
+    padding: 10px 15px;
+    background-color: rgb(237, 181, 28);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: felx;
+    /* align-self: end !important; */
+}
+
+.form-group button:hover {
+    background-color: rgb(37, 90, 109);
+}
+
+/* OTHER */
+
+
+.error {
+    color: red;
+    font-weight: bold;
 }

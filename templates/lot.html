@@ -11,7 +11,7 @@
         <div style="display: flex; flex-direction: column; justify-content: space-between; margin:10px;">
             <div>
                 <h2>{{ lot.wine_name}} </h2>
-                <h3>{{ lot.vineyard.name }} </h3>
+                <h3>{{ lot.vineyard.name }} Vineyard </h3>
                 <h4>{{ lot.varietal }} </h4>
                 <h4>{{ lot.vintage.year }} </h4>
             </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div style="margin-left:40px;">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem; max-height: 10rem;">
                 <div class="card-header">
                     Bottles available to drink now:  {{ count_drinkable_bottles }}
                 </div>
