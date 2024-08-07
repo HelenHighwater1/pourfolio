@@ -11,6 +11,8 @@
         <div style="display: flex; flex-direction: column; justify-content: space-between; margin:10px;">
             <div>
                 <h2>{{ lot.wine_name}} </h2>
+                <h3>{{ lot.vineyard.name }} </h3>
+                <h4>{{ lot.varietal }} </h4>
                 <h4>{{ lot.vintage.year }} </h4>
             </div>
             <div style="padding-bottom: 20px;">
@@ -26,13 +28,15 @@
             </div>
         </div>
         <div style="margin-left:40px;">
-            <div class="card" style="width: 18rem; height: 15rem;">
+            <div class="card" style="width: 18rem;">
                 <div class="card-header">
-                    {{ lot.vineyard.name }} Vineyard
+                    Bottles available to drink now:  {{ count_drinkable_bottles }}
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Bottles available to drink now:  {{ count_drinkable_bottles }}</li>
-                    <li class="list-group-item">All Bottles in Cellar: {{ count_all_bottles }}</li>
+                    <li class="list-group-item font-weight-bold">All Bottles in Cellar: {{ count_all_bottles }}</li>
+                    {% for count_per_year in aging_schedule %}
+                    <li class="list-group-item">Available in {{count_per_year[0].year}} : {{count_per_year[1]}}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -44,7 +48,7 @@
         {% for note in all_tasting_notes %}
         <div class="card" >
             <div class="card-body">
-                <h5 class="card-title">{{ note.date.month }}, {{ note.date.year }}</h5>
+                <h5 class="card-title">{{ note.date.strftime('%b %d, %Y') }}</h5>
                 <p class="card-text">{{ note.note }}</p>
             </div>
         </div>

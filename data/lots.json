@@ -1,235 +1,235 @@
 [
   {
     "varietal": "Cabernet Franc",
-    "wine_name": "Hourglass Estate Cabernet Franc",
+    "wine_name": "Crimson Peak",
     "year": "2010",
     "celebration": true
   },
   {
     "varietal": "Chardonnay",
-    "wine_name": "Kendall-Jackson Vintner's Reserve Chardonnay",
+    "wine_name": "Golden Wave",
     "year": "2018",
     "celebration": false
   },
   {
     "varietal": "Merlot",
-    "wine_name": "Duckhorn Vineyards Merlot",
+    "wine_name": "Moonlit Grove",
     "year": "2016",
     "celebration": true
   },
   {
     "varietal": "Pinot Noir",
-    "wine_name": "Meiomi Pinot Noir",
+    "wine_name": "Ruby Shadows",
     "year": "2019",
     "celebration": false
   },
   {
     "varietal": "Sauvignon Blanc",
-    "wine_name": "Cloudy Bay Sauvignon Blanc",
+    "wine_name": "Silver Breeze",
     "year": "2020",
     "celebration": true
   },
   {
     "varietal": "Syrah",
-    "wine_name": "E. Guigal Côtes du Rhône Rouge",
+    "wine_name": "Mystic Dawn",
     "year": "2017",
     "celebration": false
   },
   {
     "varietal": "Zinfandel",
-    "wine_name": "Ridge Vineyards Geyserville Zinfandel",
+    "wine_name": "Velvet Ember",
     "year": "2015",
     "celebration": true
   },
   {
     "varietal": "Malbec",
-    "wine_name": "Catena Zapata Malbec",
+    "wine_name": "Obsidian Flame",
     "year": "2018",
     "celebration": false
   },
   {
     "varietal": "Riesling",
-    "wine_name": "Dr. Loosen Riesling",
+    "wine_name": "Winter's Kiss",
     "year": "2019",
     "celebration": true
   },
   {
     "varietal": "Grenache",
-    "wine_name": "Clos Saint Jean Châteauneuf-du-Pape",
+    "wine_name": "Scarlet Serenade",
     "year": "2017",
     "celebration": false
   },
   {
     "varietal": "Tempranillo",
-    "wine_name": "Marqués de Riscal Reserva",
+    "wine_name": "Desert Mirage",
     "year": "2016",
     "celebration": true
   },
   {
     "varietal": "Cabernet Sauvignon",
-    "wine_name": "Silver Oak Cabernet Sauvignon",
+    "wine_name": "Royal Crest",
     "year": "2014",
     "celebration": true
   },
   {
     "varietal": "Petit Verdot",
-    "wine_name": "Pine Ridge Petit Verdot",
+    "wine_name": "Shadow's Edge",
     "year": "2012",
     "celebration": false
   },
   {
     "varietal": "Sangiovese",
-    "wine_name": "Antinori Chianti Classico",
+    "wine_name": "Crimson Dawn",
     "year": "2015",
     "celebration": true
   },
   {
     "varietal": "Barbera",
-    "wine_name": "Vietti Barbera d'Asti",
+    "wine_name": "Midnight Whisper",
     "year": "2017",
     "celebration": false
   },
   {
     "varietal": "Mourvèdre",
-    "wine_name": "Tablas Creek Vineyard Mourvèdre",
+    "wine_name": "Twilight Echo",
     "year": "2019",
     "celebration": true
   },
   {
     "varietal": "Albariño",
-    "wine_name": "Pazo de Señorans Albariño",
+    "wine_name": "Ocean's Charm",
     "year": "2018",
     "celebration": false
   },
   {
     "varietal": "Chenin Blanc",
-    "wine_name": "Domaine Huet Vouvray Sec",
+    "wine_name": "Spring Blossom",
     "year": "2016",
     "celebration": true
   },
   {
     "varietal": "Viognier",
-    "wine_name": "Yalumba Eden Valley Viognier",
+    "wine_name": "Golden Radiance",
     "year": "2015",
     "celebration": false
   },
   {
     "varietal": "Gamay",
-    "wine_name": "Louis Jadot Beaujolais-Villages",
+    "wine_name": "Rosy Delight",
     "year": "2017",
     "celebration": true
   },
   {
     "varietal": "Petite Sirah",
-    "wine_name": "Stags' Leap Petite Sirah",
+    "wine_name": "Eclipse",
     "year": "2013",
     "celebration": false
   },
   {
     "varietal": "Torrontés",
-    "wine_name": "Colomé Torrontés",
+    "wine_name": "Morning Dew",
     "year": "2018",
     "celebration": true
   },
   {
     "varietal": "Grüner Veltliner",
-    "wine_name": "Domäne Wachau Grüner Veltliner",
+    "wine_name": "Emerald Dream",
     "year": "2019",
     "celebration": false
   },
   {
     "varietal": "Nero d'Avola",
-    "wine_name": "Donnafugata Nero d'Avola",
+    "wine_name": "Sicilian Star",
     "year": "2017",
     "celebration": true
   },
   {
     "varietal": "Carmenère",
-    "wine_name": "Montes Alpha Carmenère",
+    "wine_name": "Andean Echo",
     "year": "2016",
     "celebration": false
   },
   {
     "varietal": "Gewürztraminer",
-    "wine_name": "Trimbach Gewürztraminer",
+    "wine_name": "Spice Trail",
     "year": "2018",
     "celebration": true
   },
   {
     "varietal": "Garnacha",
-    "wine_name": "Borsao Tres Picos Garnacha",
+    "wine_name": "Sunset Glow",
     "year": "2015",
     "celebration": false
   },
   {
     "varietal": "Fiano",
-    "wine_name": "Feudi di San Gregorio Fiano di Avellino",
+    "wine_name": "Harvest Moon",
     "year": "2016",
     "celebration": true
   },
   {
     "varietal": "Nebbiolo",
-    "wine_name": "Gaja Barbaresco",
+    "wine_name": "Barolo Whisper",
     "year": "2014",
     "celebration": false
   },
   {
     "varietal": "Dolcetto",
-    "wine_name": "Pio Cesare Dolcetto d'Alba",
+    "wine_name": "Autumn Bliss",
     "year": "2017",
     "celebration": true
   },
   {
     "varietal": "Lambrusco",
-    "wine_name": "Cleto Chiarli Lambrusco di Sorbara",
+    "wine_name": "Ruby Sparkle",
     "year": "2019",
     "celebration": false
   },
   {
     "varietal": "Vermentino",
-    "wine_name": "Poggio al Tesoro Solosole Vermentino",
+    "wine_name": "Mediterranean Dream",
     "year": "2018",
     "celebration": true
   },
   {
     "varietal": "Touriga Nacional",
-    "wine_name": "Quinta do Crasto Touriga Nacional",
+    "wine_name": "Heritage",
     "year": "2015",
     "celebration": false
   },
   {
     "varietal": "Pinot Grigio",
-    "wine_name": "Santa Margherita Pinot Grigio",
+    "wine_name": "Crystal Clear",
     "year": "2018",
     "celebration": true
   },
   {
     "varietal": "Cortese",
-    "wine_name": "Pio Cesare Gavi",
+    "wine_name": "Pure Essence",
     "year": "2017",
     "celebration": false
   },
   {
     "varietal": "Montepulciano",
-    "wine_name": "Masciarelli Montepulciano d'Abruzzo",
+    "wine_name": "Majestic Hills",
     "year": "2016",
     "celebration": true
   },
   {
     "varietal": "Müller-Thurgau",
-    "wine_name": "Elena Walch Müller-Thurgau",
+    "wine_name": "Alpine Bloom",
     "year": "2019",
     "celebration": false
   },
   {
     "varietal": "Assyrtiko",
-    "wine_name": "Domaine Sigalas Assyrtiko",
+    "wine_name": "Santorini Sunset",
     "year": "2018",
     "celebration": true
   },
   {
     "varietal": "Tempranillo Blanco",
-    "wine_name": "Viña Ijalba Tempranillo Blanco",
+    "wine_name": "Rioja Essence",
     "year": "2017",
     "celebration": false
   }

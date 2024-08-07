@@ -32,7 +32,6 @@ def login():
             session['user_name'] = user.user_name
             session['cellar']= user.cellar_id
             session['current_year'] = datetime.today().year
-            flash('logged in!')
             return redirect('/cellar')
         else:
   
@@ -57,7 +56,11 @@ def sign_up():
         return redirect('/')
     else: 
         user = crud.create_user(user_name=user_name, email=email, password=password)
-        session.clear()
+        session['user'] = user.user_id
+        session['user_name'] = user.user_name
+        session['cellar']= user.cellar_id
+        session['current_year'] = datetime.today().year
+ 
         flash("Congratulations - you have an account and are logged in!")    
         return redirect('/cellar')
     
@@ -153,11 +156,13 @@ def show_lot(lot_id):
     all_tasting_notes = crud.get_all_tasting_notes(lot_id)
     count_all_bottles = crud.get_count_all_bottles(lot_id)
     count_drinkable_bottles = crud.get_count_drinkable_bottles(lot_id)
+    aging_schedule = crud.get_lot_aging_schedule(lot_id)
     return render_template('lot.html', 
                            lot=lot, 
                            count_drinkable_bottles=count_drinkable_bottles, 
                            count_all_bottles=count_all_bottles, 
-                           all_tasting_notes=all_tasting_notes, 
+                           all_tasting_notes=all_tasting_notes,
+                           aging_schedule=aging_schedule 
                            )
 
 

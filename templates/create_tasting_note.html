@@ -5,7 +5,7 @@
 <h1>Create a tasting note for this bottle? </h1>
 
 <form action="/create_tasting_note/{{bottle.bottle_id}}" method="POST">
-    <label for="note">Example textarea</label>
+    <label for="note">Tasting Note: </label>
     <textarea class="form-control" id="note" name="note" rows="3"></textarea>
     <input type="submit">
 </form>
@@ -14,7 +14,7 @@
 <form action="/lots/{{bottle.lot_id}}">
     <button type="submit">Skip the tasting note</button>
 </form>
-<form action="/undo_drink_bottle/{{bottle.bottle_id}}">
+<form action="/undo_drink_bottle/{{bottle.bottle_id}}" method="POST">
     <button type="submit">Undo drink bottle</button>
 </form>
 

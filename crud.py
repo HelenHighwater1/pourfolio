@@ -3,7 +3,7 @@
 from model import db, User, Cellar, Lot, Bottle, TastingNote, Vineyard, connect_to_db
 
 
-from sqlalchemy import func, or_
+from sqlalchemy import func, or_, desc
 from datetime import datetime
 
 # -----------------------
@@ -218,7 +218,8 @@ def get_lot_aging_schedule(lot_id):
         Bottle.drinkable_date, 
         func.count(Bottle.bottle_id)
         ).filter(
-            Bottle.lot_id == lot_id
+            Bottle.lot_id == lot_id, 
+            Bottle.drunk == False
             ).group_by(Bottle.drinkable_date).order_by(Bottle.drinkable_date)
 
 
@@ -298,7 +299,7 @@ def create_tasting_note(bottle, user, note, date):
 
 
 def get_all_tasting_notes(lot_id):
-    all_tasting_notes = db.session.query(TastingNote).join(Bottle).filter(Bottle.lot_id == lot_id).all()
+    all_tasting_notes = db.session.query(TastingNote).join(Bottle).filter(Bottle.lot_id == lot_id).order_by(desc(TastingNote.date)).all()
     return all_tasting_notes
 
 

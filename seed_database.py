@@ -39,7 +39,7 @@ for vineyard in vineyards_data:
 
 for n in range(4):
     email = f'user{n}@test.com'
-    user_name = f'name{n}'
+    user_name = f'Name{n}'
     password = 'password'
 
     user = crud.create_user(user_name, email, password)
