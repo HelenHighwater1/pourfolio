@@ -20,9 +20,21 @@ body {
     color: rgba(245, 245, 245, 0.885) !important;
     font-weight: 200;
 }
+.dropdown-item {
+    color: rgb(37, 90, 109) !important;
+}
 
 .navbar-custom {
     background-color: rgb(37, 90, 109) !important;
+}
+
+#searchBtn {
+    border-color:whitesmoke;
+    color: whitesmoke
+}
+#searchBtn:hover {
+    background-color: rgb(92, 135, 150);
+    color: whitesmoke
 }
 
 .container {
@@ -49,6 +61,42 @@ body {
     column-count: 5 !important;
 }
 
+
+.filter-items select {
+    width: 100%;
+    min-width: 175px;
+    background-color: white !important;
+    border-radius: 5px;
+    margin: 5px !important;
+    padding: 4px;
+
+}
+
+
+button {
+    padding: 5px;
+    margin: 5px;
+    background-color: #d7e5ef;
+    border-radius: 5px !important;
+    border: 1px solid #0a2436;
+    box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #39739d;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+button:hover,
+button:focus {
+    background-color: #1d4866;
+    color: whitesmoke;
+}
+
+#notes-grid .card-columns {
+    column-count: 3 !important;
+}
+
 /* .card-img-top {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -56,6 +104,7 @@ body {
 
 .card {
     height: 400px;
+    padding-top: 5px;
     border-radius: 10px !important;
 }
 

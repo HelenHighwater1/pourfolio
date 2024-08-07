@@ -7,14 +7,15 @@
     <div id="cellar-filters">
         <h4>Filter by:</h4>
             <div id="filtered-by"></div>
-                <select id="varietal">with
+            <div class="filter-items">
+                <select id="varietal">
                     <option  value="varietal">Varietal</option>
                         {% for item in varietals %}
                             <option id="varietal" value="{{ item }}">{{ item }}</option>
                         {% endfor %}
                 </select>
                 <br>
-                <select id="vineyard">
+                <select style="width:100%" id="vineyard">
                     <option  value="vineyard">Vineyard</option>
                         {% for item in vineyards %}
                             <option id="vineyard" value="{{ item }}">{{ item }}</option>
@@ -47,7 +48,7 @@
                     <option id="celebration" value="True">True</option>
                     <option id="celebration" value="False">False</option>
                 </select>
-
+            </div>
     </div>
     <div id="cellar-main">
         <div id="cellar_lots">

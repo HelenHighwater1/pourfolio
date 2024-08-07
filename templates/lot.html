@@ -25,28 +25,31 @@
                 </div>
             </div>
         </div>
-        <div  style="margin:10px;">
-            <h4> {{ lot.vineyard.name }} Vineyard</h4>
-            <p> Bottles available to drink now:{{ count_drinkable_bottles }}</p>
-            
-            <p> All Bottles in Cellar:
-                {{ count_all_bottles }}
-            </p>
-
+        <div style="margin-left:40px;">
+            <div class="card" style="width: 18rem; height: 15rem;">
+                <div class="card-header">
+                    {{ lot.vineyard.name }} Vineyard
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Bottles available to drink now:  {{ count_drinkable_bottles }}</li>
+                    <li class="list-group-item">All Bottles in Cellar: {{ count_all_bottles }}</li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <div>
-        <p>tasting notes:</p>
-        
-        <ul>
-            {% for note in all_tasting_notes %}
-            <li>
-                {{ note.date.month }}, {{ note.date.year }}<br>
-                {{ note.note }}
-            </li>
-            {% endfor %}
-        </ul>
+    <div id="notes-grid">
+        <h3>Tasting notes:</h3>
+        <div class="card-columns">
+        {% for note in all_tasting_notes %}
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title">{{ note.date.month }}, {{ note.date.year }}</h5>
+                <p class="card-text">{{ note.note }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
     </div>
 
 </div>
