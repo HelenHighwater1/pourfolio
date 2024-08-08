@@ -16,11 +16,11 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false" style="color: darkslategray;">
+                    aria-expanded="false" >
                     ---
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/vineyards">View Vineyards</a>
+                    <a class="dropdown-item" href="/vineyards" >View Vineyards</a>
                 </div>
             </li>
         </ul>
@@ -33,7 +33,10 @@
 
 {% else %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-    <h2 class="mx-3 text-white">Welcome to Pourfolio!</h2>
+<nav class="navbar navbar-expand-lg justify-content-between navbar-dark navbar-custom">
+    <h2 class="mx-3 text-white font-bold">Welcome to <span class="title-font">Pourfolio</span>!</h2>
+    <form class="form-inline">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Try a Demo</button>
+    </form>
 </nav>
 {% endif %}

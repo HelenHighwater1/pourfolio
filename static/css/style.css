@@ -1,3 +1,8 @@
+.title-font {
+    font-family: "Grey Qo", cursive;
+    font-size: 60px !important;
+}
+
 h1, h2, h3, h4, h5, h6, p {
     font-family: "Libre Franklin";
     font-weight: 100 !important;
@@ -6,12 +11,30 @@ h1, h2, h3, h4, h5, h6, p {
 body {
     font-family: "Libre Franklin" !important;
     /* background-color: whitesmoke !important; */
+    margin: 10px;
+    padding: 10px;
+    /* background-image: url("/static/imgs/bgk.jpg");
+    background-position: center;
+    background-repeat: no-repeat; */
+}
+
+.background-img {
+    content: "";
+    background-image: url("/static/imgs/bgk3.jpg"); 
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: block;
 }
 
 .container {
     margin: 10px;
     padding: 10px;
-    background-color: whitesmoke;
+    background-color: #F2B749;
 }
 
 /* NAVBAR */
@@ -29,34 +52,42 @@ body {
     color: rgba(245, 245, 245, 0.885) !important;
     font-weight: 200;
 }
-.dropdown-item {
-    color: rgb(37, 90, 109) !important;
+.dropdown-menu a {
+    color: darkslategrey !important;
+    width: 110px;
+}
+.dropdown-menu a:hover, select {
+    color: darkslategrey !important;
+    background-color: white !important;
 }
 
+
 .navbar-custom {
-    background-color: rgb(37, 90, 109) !important;
+    background-color: #D66562 !important;
 }
 
 #searchBtn {
     border-color:whitesmoke;
     color: whitesmoke
 }
-#searchBtn:hover {
-    background-color: rgb(92, 135, 150);
-    color: whitesmoke
+#searchBtn:hover, select {
+    background-color: #E393BA;
+    color: whitesmoke;
+    outline: none !important;
 }
 
 
 /* BUTTONS */
 button {
-    padding: 5px;
+    padding: 5px 15px;
     margin: 5px;
-    background-color: #d7e5ef;
+    background-color: #F2B749;
     border-radius: 5px !important;
-    border: 1px solid #0a2436;
+    border: 1px solid rgb(233, 240, 237);
+    /* text-shadow: 1px 1px 2px #320A59; */
     box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
     box-sizing: border-box;
-    color: #39739d;
+    color: white;
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -64,7 +95,7 @@ button {
 
 button:hover,
 button:focus {
-    background-color: #1d4866;
+    background-color: #320A59;
     color: whitesmoke;
 }
 
@@ -76,25 +107,46 @@ button:focus {
 }
 
 #notes-grid .card-columns {
-    column-count: 3 !important;
+    column-count: 4 !important;
 }
 
+.card a:hover {
+    text-decoration: none;
+
+}
 .card {
-    height: 400px;
+    overflow: hidden;
+    min-height: 415px;
+    padding: 3px;
     padding-top: 5px;
     border-radius: 10px !important;
+    border-color: #F2B749 !important;
+    border-width: 2px;
+    background-color: whitesmoke !important;
 }
+
+.card:hover{
+    border-width: 3px;
+    transition: border-width 0.3s
+}   
 
 .card img {
     border-radius: 10px !important;
-
+    border: solid;
+    border-width: 2px;
+    border-color: #E393BA;
 }
 
-.card-title {
+
+.card-title, .card-title:hover {
     font-size: medium;
+    color: rgb(10, 19, 19);
+
 }
-.card-subtitle{
+.card-subtitle, .card-subtitle:hover {
     font-size: small;
+    color: rgb(10, 19, 19);
+
 }
 
 
@@ -132,7 +184,7 @@ button:focus {
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: rgb(10, 19, 19);
     text-decoration: none;
     cursor: pointer;
 }
@@ -153,29 +205,33 @@ button:focus {
     display: block;
     align-items: stretch;
     justify-content: stretch;
+
 }
 
 .filter-items select {
     width: 100%;
     min-width: 175px;
-    background-color: white !important;
+    background-color: whitesmoke !important;
     border-radius: 5px;
+    border-color: #F2B749;
+    /* color: #D66562 !important;  */
     margin: 5px !important;
     padding: 4px;
-
 }
 
 /* Vineyard */
 
 .vineyard-list {
     list-style-type: none;
-    padding: 0;
+    padding-left: 15rem;
+    padding-right: 15rem;
 }
 
 .vineyard-item {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
+    background-color: whitesmoke;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -183,7 +239,7 @@ button:focus {
 }
 
 .vineyard-edit-button {
-    background-color: rgb(57, 136, 170);
+    background-color: #D66562;
     color: white;
     border: none;
     border-radius: 3px;
@@ -194,45 +250,105 @@ button:focus {
 
 /* FORMS */
 
-/* .form-container {
-    max-width: 500px;
+.form-container {
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
-} */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 .form-line {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .form-line label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333;
 }
 
-.form-line input {
-    width: 100%;
-    padding: 10px;
+.form-line input,
+.form-line select {
+    width: calc(100% - 16px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
-.form-line button {
-    padding: 10px 15px;
+#font-weight-light {
+    font-weight: light !important;
+}
+.form-line .radio-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #F2B749;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #D66562;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
     background-color: rgb(237, 181, 28);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    display: felx;
-    /* align-self: end !important; */
+    transition: background-color 0.3s;
 }
 
-.form-group button:hover {
-    background-color: rgb(37, 90, 109);
+button[type="submit"]:hover {
+    background-color: #320A59;
 }
+
+ /* LOGIN / SIGN UP */
+
+.login-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: -1;
+}
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-signup{
+    width: 400px; 
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px; 
+    border-radius: 10px;
+}
+
+
 
 /* OTHER */
 

@@ -2,23 +2,39 @@
 {% block title %}Add Bottles {% endblock %}
 
 {% block body %}
-<h1>Add bottles of {{lot.vintage.year}} {{lot.wine_name}} : </h1>
-Display current aging schedule->
-Display wines with none date to drink 
-<ul>
-{% for count_per_year in lot_aging_schedule %} 
-    <li>{{count_per_year[0].year}} : {{count_per_year[1]}} </li>
-{% endfor %}
-</ul>
+<h3>Add bottles </h3>
+<h4>
+{{lot.vintage.year}} {{lot.wine_name}}
+</h4>
+<div style="display: flex; flex-direction:row; margin:20px;">
+    <div style="width: 40%;margin: auto"> 
+        <div class="form-container">
+            <form action="/add_bottles/{{lot.lot_id}}" method="POST">
+                {% for i in range(0, bottle_qty) %}
+                    <div class="form-line">
+                        <label for="year">Year to drink:</label>
+                        <input type="integer" name="year" id="year" pattern="202[3-9]||20[3-9]\d">
+                    </div>
+                {% endfor %}
+                <div class="form-line">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="width: 60%; justify-items: center; align-self: center;">
 
-<form action="/add_bottles/{{lot.lot_id}}" method="POST">
-    {% for i in range(0, bottle_qty) %}
-        <li>
-            Year to drink: <input type="integer" name="year" pattern="202[3-9]||20[3-9]\d"><br>
-        </li>
-    {% endfor %}
-    <input type="submit">
-</form>
-
+        <div class="card" style="width: 18rem; margin: auto">
+            <div class="card-header">
+                Bottles in Cellar:
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for count_per_year in lot_aging_schedule %}
+                <li class="list-group-item">Available in {{count_per_year[0].year}} : {{count_per_year[1]}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
