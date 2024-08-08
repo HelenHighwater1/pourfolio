@@ -8,6 +8,7 @@ VARIETALS = wine_varietals = [
     "Cornas",
     "Gigondas",
     "Syrah/Shiraz",
+    "Syrah",
     "Bordeaux",
     "Zinfandel",
     "Malbec",

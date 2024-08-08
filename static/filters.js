@@ -79,7 +79,7 @@ function searchFilter(evt){
                             <div class="card-body">
                                 <p class="card-title">${lot.wine_name}</p>
                                 <p class="card-subtitle">${lot.vineyard_name}, ${lot.varietal}</p>
-                                <p class="card-text">${new Date(lot.vintage).getFullYear()}</p>
+                                <p class="card-subtitle">${new Date(lot.vintage).getFullYear()}</p>
                             </div>
                         </a>
                     </div>`

@@ -22,8 +22,13 @@ def homepage():
 
 @app.route('/login', methods=['POST'])
 def login():
-    user_email = request.form['email']
-    password = request.form['password']
+    if 'demo' in request.form:
+        user_email = 'user0@test.com'
+        password = 'password'
+    else:
+        user_email = request.form['email']
+        password = request.form['password']
+    
     user = crud.get_user_by_email(user_email)
 
     if user:
@@ -40,6 +45,7 @@ def login():
     else:
         flash('incorrect username/password')
         return redirect('/')
+
 
 
 @app.route('/sign_up', methods=['POST'])
