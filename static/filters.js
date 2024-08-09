@@ -33,6 +33,7 @@ function apply_filters(evt) {
                                 <p class="card-subtitle">${new Date(lot.vintage).getFullYear()}</p>
                             </div>
                         </a>
+                        
                     </div>`
                 )
             })
