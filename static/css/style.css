@@ -124,6 +124,12 @@ button:focus {
     background-color: whitesmoke !important;
 }
 
+#notes-grid .card {
+    overflow: hidden;
+    height: 400px;
+ 
+}
+
 .card:hover{
     border-width: 3px;
     transition: border-width 0.3s
