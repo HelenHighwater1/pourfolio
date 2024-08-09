@@ -1,4 +1,6 @@
-![logo](static/imgs/pourfolio-logo.png =250x)
+
+<p align="center"><img src="static/imgs/pourfolio-logo.png" width="300" ></p>
+
 # Pourfolio
 Pourfolio is wine cellar tracking application. It offers users the ability to create aging schedules, take tasting notes, and review historical tasting data.
 
@@ -6,7 +8,7 @@ A bit of history here - about a year ago, during our honeymoon in France, my hus
 
 To solve this problem, I developed Pourfolio as a fun, personal project. The app is designed to store aging schedules and tasting notes in one convenient place. This way, whether it’s 10, 20, or even 30 years from now, we can open the exact bottle we intended, and effortlessly add new tasting notes while reviewing those from previous years.
 
-![log-in](static/imgs/login.png)
+![log-in](static/imgs/login.jpg)
 
 ## Features
 
@@ -20,18 +22,18 @@ Key Features:
 - Tasting Note Review: Users can access and review all tasting notes associated with a specific wine, allowing for comparisons and historical tracking.
 - Vineyard Management: Users have the capability to create and edit information about vineyards.
 
-![view wine](static/imgs/wine-view.jpg)
+![view wine](static/imgs/wine-view.png)
 
 ## Technologies
 
-Pourfolio has a backend framework of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  Its frontend is Javascript and React, as well as some Bootstrap.  
+Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  Its frontend is Javascript and React, as well as some Bootstrap.  
 
 ## Special Features
 
 ### React
 
 ```javascript 
-    code snippet
+    
 ```
 
 ### React Modal 
@@ -48,7 +50,7 @@ Pourfolio has a backend framework of Python, Flask, Jinja, and SQLAlchemy; using
 ## Coming Soon!!  
 - Users can grant other users access to their cellar
 - Pourfolio is currently in transiotion to become a full React app.
-- "choose for me" button - to randomly select an available wine.
+- "Choose For Me" button - to randomly select an available wine.
 
 # Thanks for visiting!  
 Feel free to [get in touch](https://www.heyimhelen.com)!
