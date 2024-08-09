@@ -115,7 +115,7 @@ button:focus {
 }
 .card {
     overflow: hidden;
-    min-height: 415px;
+    height: 515px;
     padding: 3px;
     padding-top: 5px;
     border-radius: 10px !important;
