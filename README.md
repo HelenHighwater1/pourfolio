@@ -20,7 +20,7 @@ Wine Addition and Tracking: Users can add new bottles to their cellars, set up a
 Tasting Note Review: Users can access and review all tasting notes associated with a specific wine, allowing for comparisons and historical tracking.
 Vineyard Management: Users have the capability to create and edit information about vineyards.
 
-![view wine](static/imgs/view_wine.png)
+![view wine](static/imgs/wine-view.png)
 
 ## Technologies
 
