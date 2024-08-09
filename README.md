@@ -12,11 +12,11 @@ To solve this problem, I developed Pourfolio as a fun, personal project. The app
 
 ## Technologies
 
-Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  Its frontend is Javascript and React, as well as some Bootstrap.  
+Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  The frontend is Javascript and React, as well as some Bootstrap.  
 
 ## Features
 
-All site visitors are able to either create their own account, or take a spin on our "Demo User" account to have a look around.  
+All site visitors are able to either create their own account or take a spin on our "Demo User" account to have a look around.  
 
 Key Features:
 
@@ -33,9 +33,9 @@ Key Features:
 ## Special Features
 
 ### React
-Although this did not start as a React app, I wanted to test the waters with React.  I kind of sandboxed this by incorporating it into a non-essential part of the app - Vinyards was great because it is a simple table and doesn't really touch anything in the main functionality.  
+Although this did not start as a React app, I wanted to test the waters with React.  I kind of sandboxed this by incorporating it into a non-essential part of the app - Vineyards was great because it is a simple table and doesn't really touch anything in the main functionality.  
 
-In the code below, I  use a conditionally rendered modal to edit the vineyard information, save the updates, and then loop through the vineyard list to replace the old vineyard information with the updated information.
+In the code below, I use a conditionally rendered modal to edit the vineyard information, save the updates, and then loop through the vineyard list to replace the old vineyard information with the updated information.
 
 
 ```javascript 
@@ -80,7 +80,7 @@ WILL HAVE GIF OF MODAL IN ACTION
 
 ### Ajax
 
-I wanted to use a really dynamic filter function - below you can see that I have one function that will filter the cellar based on both the catagory and the specific value to filter.  This simplifies the backend code into one function, instead of breaking it out to seven functions - one for each value of the filter.    
+I wanted to use a really dynamic filter function - below you can see that I have one function that will filter the cellar based on both the category and the specific value to filter.  This simplifies the backend code into one function, instead of breaking it out to seven functions - one for each value of the filter.    
 
 filters.js:
 ```javascript 
@@ -123,7 +123,7 @@ def filter_cellar_lots(filter_on, filter_val, cellar_id):
 
 ## Coming Soon!!  
 - Users can grant other users access to their cellar
-- Pourfolio is currently in transiotion to become a full React app.
+- Pourfolio is currently in transition to become a full React app.
 - "Choose For Me" button - to randomly select an available wine.
 
 # Thanks for visiting!  
