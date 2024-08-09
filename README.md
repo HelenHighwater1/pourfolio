@@ -80,10 +80,10 @@ WILL HAVE GIF OF MODAL IN ACTION
 
 ### Ajax
 
-I wanted to be able to filter wines on a number of different fields (year, varietal, vineyard, etc), but I didn't want ton of repetitive code for each vineyard.  So, I set up a dynamic filter function, ajax call, backend endpoint, and crud function that could handle any field I wanted to filter on.
+I wanted to be able to filter wines on a number of different fields (year, varietal, vineyard, etc.), but I didn't want redundant code for each field's query.  Instead, I set up a dynamic filter function, ajax call, backend endpoint, and crud function that could handle any field I wanted to filter on.
 
 
-filters.js:
+#### filters.js:
 ```javascript 
 function apply_filters(evt) {
     evt.preventDefault();
@@ -111,7 +111,7 @@ function apply_filters(evt) {
 }
 
 ```
-crud.py: 
+#### crud.py: 
 ```python
 def filter_cellar_lots(filter_on, filter_val, cellar_id):
     all_filtered_lots = db.session.query(Lot).filter(
