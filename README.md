@@ -26,7 +26,7 @@ Key Features:
 - Tasting Note Review: Users can access and review all tasting notes associated with a specific wine, allowing for comparisons and historical tracking.
 - Vineyard Management: Users have the capability to create and edit information about vineyards.
 
-<img src="static/imgs/cellar-and-wine-view.png" >
+<img src="static/imgs/cellar-and-wine-views.png" >
 
 
 
