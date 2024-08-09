@@ -47,7 +47,8 @@ Pourfolio has a backend framework of Python, Flask, Jinja, and SQLAlchemy; using
 
 ## Coming Soon!!  
 - Users can grant other users access to their cellar
-- Pourfolio is currently in transiotion to become a full React app. 
+- Pourfolio is currently in transiotion to become a full React app.
+- "choose for me" button - to randomly select an available wine.
 
 # Thanks for visiting!  
 Feel free to [get in touch](https://www.heyimhelen.com)!
