@@ -63,42 +63,7 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
         <span className="close" onClick={closeModal}>&times;</span>
         <h4>Edit {vineyard.name}</h4>
           <form onSubmit={handleSubmit}>
-            <div class="form-line">
-              <label htmlFor="name">Vineyard Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={evt => setName(evt.target.value)}
-                placeholder="Enter vineyard name"
-              />
-            </div>
-            <div class="form-line">
-              <label htmlFor="region">Region:</label>
-              <input
-                type="text"
-                id="region"
-                name="region"
-                value={region}
-                onChange={evt => setRegion(evt.target.value)}
-                placeholder="Enter region"
-              />
-            </div>
-            <div class="form-line">
-              <label htmlFor="country">Country:</label>
-              <input
-                type="text"
-                id="country"
-                name="country"
-                value={country}
-                onChange={evt => setCountry(evt.target.value)}
-                placeholder="Enter country"
-              />
-            </div>
-            <div class="form-line">
-              <button type="submit">Save</button>
-            </div>
+              ......
           </form>
 
       </div>
@@ -109,11 +74,13 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
 ```
 
 ### React Modal 
-![ezgif com-gif-maker](static/imgs/edit vineyard.mov)
+WILL HAVE GIF OF MODAL IN ACTION
 
 ### Ajax
 
+I wanted to use a really dynamic filter function - below you can see that I have one function that will filter the cellar based on both the catagory and the specific value to filter.  This simplifies the backend code into one function, instead of breaking it out to seven functions - one for each value of the filter.    
 
+filters.js:
 ```javascript 
 function apply_filters(evt) {
     evt.preventDefault();
@@ -126,22 +93,13 @@ function apply_filters(evt) {
         .then(response => response.json())
         .then(res => {    
             document.querySelector('#cellar_lots').innerHTML = '';
-            document.querySelector('#cellar_lots').classList.add("card-columns");
             document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;
          
             res.forEach(lot => {
                 document.querySelector('#cellar_lots').insertAdjacentHTML(
                     'beforeend', 
                     `<div class="card" >
-                        <a href='/lots/${lot.lot_id }'>
-                            <img class="card-img-top" src='${lot.image}' alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title">${lot.wine_name}</p>
-                                <p class="card-subtitle">${lot.vineyard_name}, ${lot.varietal}</p>
-                                <p class="card-subtitle">${new Date(lot.vintage).getFullYear()}</p>
-                            </div>
-                        </a>
-                        
+                        ......
                     </div>`
                 )
             })
@@ -149,6 +107,15 @@ function apply_filters(evt) {
         })
 }
 
+```
+crud.py: 
+```python
+def filter_cellar_lots(filter_on, filter_val, cellar_id):
+    all_filtered_lots = db.session.query(Lot).filter(
+        Lot.cellar_id == cellar_id
+        ).where(getattr(Lot, f'{filter_on}') == filter_val).all()
+    
+    return all_filtered_lots
 ```
 
 
