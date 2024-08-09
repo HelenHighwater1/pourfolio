@@ -2,39 +2,44 @@
 {% block title %}Add Bottles {% endblock %}
 
 {% block body %}
-<h3>Add bottles </h3>
-<h4>
-{{lot.vintage.year}} {{lot.wine_name}}
-</h4>
-<div style="display: flex; flex-direction:row; margin:20px;">
-    <div style="width: 40%;margin: auto"> 
-        <div class="form-container">
-            <form action="/add_bottles/{{lot.lot_id}}" method="POST">
-                {% for i in range(0, bottle_qty) %}
+<div id="notes-grid" style="width: 50%; margin: 0 auto;">
+
+    <h3>Add bottles </h3>
+    <h4>
+    {{lot.vintage.year}} {{lot.wine_name}}
+    </h4>
+    <div style="display: flex; flex-direction:row; margin:20px;">
+        <div style="width: 40%;margin: auto"> 
+            <div class="form-container">
+                <form action="/add_bottles/{{lot.lot_id}}" method="POST">
+                    {% for i in range(0, bottle_qty) %}
+                        <div class="form-line">
+                            <label for="year">Year to drink:</label>
+                            <input type="integer" name="year" id="year" pattern="202[3-9]||20[3-9]\d">
+                        </div>
+                    {% endfor %}
                     <div class="form-line">
-                        <label for="year">Year to drink:</label>
-                        <input type="integer" name="year" id="year" pattern="202[3-9]||20[3-9]\d">
+                        <button type="submit">Submit</button>
                     </div>
-                {% endfor %}
-                <div class="form-line">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div style="width: 60%; justify-items: center; align-self: center;">
-
-        <div class="card" style="width: 18rem; margin: auto">
-            <div class="card-header">
-                Bottles in Cellar:
+                </form>
             </div>
-            <ul class="list-group list-group-flush">
-                {% for count_per_year in lot_aging_schedule %}
-                <li class="list-group-item">Available in {{count_per_year[0].year}} : {{count_per_year[1]}}</li>
-                {% endfor %}
-            </ul>
         </div>
-    </div>
-</div>
+        {% if lot_aging_schedule %}
+        <div style="width: 60%; justify-items: center; align-self: center;">
 
+            <div class="card" style="width: 18rem; margin: auto">
+                <div class="card-header">
+                    Bottles in Cellar:
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for count_per_year in lot_aging_schedule %}
+                    <li class="list-group-item">Available in {{count_per_year[0].year}} : {{count_per_year[1]}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
 {% endblock %}

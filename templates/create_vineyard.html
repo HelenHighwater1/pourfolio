@@ -2,26 +2,29 @@
 {% block title %}Create a Vineyard{% endblock %}
 
 {% block body %}
-<h2>Add a vineyard: </h2>
-<div class="form-container">
-    <form action="/create_vineyard" method="POST">
-        <div class="form-line">
-            <label for="vineyard_name">Vineyard Name:</label>
-            <input id="vineyard_name" type="text" name="vineyard_name" required>
-        </div>
-        <div class="form-line">
-            <label for="vineyard_name">Country:</label>
-            <input id="country" type="text" name="country" required>
-        </div>
-        <div class="form-line">
-            <label for="region">Region:</label>
-            <input id="region" type="text" name="region" required>
-        </div>
-        <div class="form-line">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
+<div id="notes-grid" style="width: 50%; margin: 0 auto;">
+    <h2>Add a vineyard: </h2>
+    <div class="form-container">
+        <form action="/create_vineyard" method="POST">
+            <div class="form-line">
+                <label for="vineyard_name">Vineyard Name:</label>
+                <input id="vineyard_name" type="text" name="vineyard_name" required>
+            </div>
+            <div class="form-line">
+                <label for="vineyard_name">Country:</label>
+                <input id="country" type="text" name="country" required>
+            </div>
+            <div class="form-line">
+                <label for="region">Region:</label>
+                <input id="region" type="text" name="region" required>
+            </div>
+            <div class="form-line">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 
 
 {% endblock %}

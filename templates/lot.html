@@ -2,10 +2,10 @@
 {% block title %}{{lot.wine_name}}{% endblock %}
 
 {% block body %}
-<div style="display: flex; flex-direction: column;">
+<div style="display: flex; flex-direction: column; margin: 50px;">
 
     <div class="lot-info">
-        <div style="margin:10px;">
+        <div style="margin:10px; align-items:center">
             <img style="width:200px; border-radius: 10px;" src='/{{ lot.image() }}' alt="wine image ">
         </div>
         <div style="display: flex; flex-direction: column; justify-content: space-between; margin:10px;">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div style="margin-left:40px;">
-            <div class="card" style="width: 18rem; max-height: 10rem;">
+            <div class="card" style="width: 18rem; max-height: 10rem; border:lightgray;">
                 <div class="card-header">
                     Bottles available to drink now:  {{ count_drinkable_bottles }}
                 </div>
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div id="notes-grid">
+    <div id="notes-grid" style="margin:20px;">
         <h3>Tasting notes:</h3>
         <div class="card-columns">
         {% for note in all_tasting_notes %}

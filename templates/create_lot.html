@@ -2,51 +2,55 @@
 {% block title %}Add to Cellar{% endblock %}
 
 {% block body %}
-<h3>Add to your cellar: </h3>
-<div class="form-container">
-    <form action="/create_lot" method="POST">
-        <div class="form-line">
-            <label for="wine_name">Wine Name:</label>
-            <input id="wine_name" type="text" name="wine_name" required>
-        </div>
-        <div class="form-line">
-            <label for="varietal">Varietal:</label>
-            <div class="form-inline">
-                <select id="varietal" name="varietal" required>
-                    {% for varietal in VARIETALS %}
-                    <option value="{{ varietal }}">{{ varietal }}</option>
+<div id="notes-grid" style="width: 50%; margin: 0 auto;">
+    <h3>Add to your cellar: </h3>
+    <div class="form-container">
+        <form action="/create_lot" method="POST">
+            <div class="form-line">
+                <label for="wine_name">Wine Name:</label>
+                <input id="wine_name" type="text" name="wine_name" required>
+            </div>
+            <div class="form-line">
+                <label for="varietal">Varietal:</label>
+                <div class="form-inline">
+                    <select id="varietal" name="varietal" required>
+                        {% for varietal in VARIETALS %}
+                        <option value="{{ varietal }}">{{ varietal }}</option>
+                        {% endfor %}
+                    </select>
+                
+                </div>
+            </div>
+            <div class="form-line">
+                <label for="vineyard">Vineyard:</label>
+                <select id="vineyard" name="vineyard" required>
+                    {% for vineyard in all_vineyards %}
+                    <option value="{{ vineyard.vineyard_id }}">{{ vineyard.name }}</option>
                     {% endfor %}
                 </select>
-            
+                <span style="display: flex; justify-content: flex-end; margin-right: 12px;"><a href='/add_vineyard' class="btn-pink">Create New Vineyard</a></span>
+                
             </div>
-        </div>
-        <div class="form-line">
-            <label for="vineyard">Vineyard:</label>
-            <select id="vineyard" name="vineyard" required>
-                {% for vineyard in all_vineyards %}
-                <option value="{{ vineyard.vineyard_id }}">{{ vineyard.name }}</option>
-                {% endfor %}
-            </select>
-            <a href='/add_vineyard' class="btn" style="align-self: right">Create New Vineyard</a>
-        </div>
-        <div class="form-line">
-            <label for="vintage">Vintage:</label>
-            <input type="number" id="vintage" name="vintage" min="1900" max="2025" required>
-        </div>
-        <div class="form-line">
-            <span style="font-weight: bold">For a Celebration?:</span>
-            <div class="radio-group">
-                <label><input type="radio" id="true" name="celebration" value="True"> <span id="font-weight-light">Yes!</span></label>
-                <label><input type="radio" id="false" name="celebration" value="False"> Nope</label>
+            <div class="form-line">
+                <label for="vintage">Vintage:</label>
+                <input type="number" id="vintage" name="vintage" min="1900" max="2025" required>
             </div>
-        </div>
-        <div class="form-line">
-            <label for="bottle_qty">Number of Bottles:</label>
-            <input id="bottle_qty" type="number" name="bottle_qty" min="1" required>
-        </div>
-        <div class="form-line">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
+            <div class="form-line">
+                <span style="font-weight: bold">For a Celebration?:</span>
+                <div class="radio-group">
+                    <label><input type="radio" id="true" name="celebration" value="True"> <span id="font-weight-light">Yes!</span></label>
+                    <label><input type="radio" id="false" name="celebration" value="False"> Nope</label>
+                </div>
+            </div>
+            <div class="form-line">
+                <label for="bottle_qty">Number of Bottles:</label>
+                <input id="bottle_qty" type="number" name="bottle_qty" min="1" required>
+            </div>
+            <div class="form-line">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 {% endblock %}

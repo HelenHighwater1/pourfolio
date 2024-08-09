@@ -167,7 +167,7 @@ button:focus {
 
 .modal-content {
     background-color: #fff;
-    z-index: 100;
+    z-index: 10;
     padding: 30px;
     border-radius: 4px;
     width: 50% !important;
@@ -193,11 +193,16 @@ button:focus {
 
 #cellar-div {
     display: flex;
+
 }
 
 #cellar-filters {
     margin: 10px;
     padding: 10px;
+    background: rgb(255, 255, 255, .9);
+    border: solid rgb(232, 228, 228) 1px;
+    border-radius: 5px;
+
 }
 
 #celar-filters select {
@@ -251,13 +256,21 @@ button:focus {
 .lot-info {
     display: flex; 
     flex-direction: row; 
-    justify-content:stretch; 
+    justify-content:space-between; 
     margin: 20px; 
-    background-color:rgb(252, 251, 251); 
+    background-color:rgb(252, 251, 251, .9); 
     border:solid 1px lightgray;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     margin: 20px;
+}
+
+#notes-grid {
+    background-color: rgb(252, 251, 251, .9);
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
 }
     /* FORMS */
 
@@ -316,9 +329,24 @@ button:focus {
     border-radius: 4px;
     transition: background-color 0.3s;
 }
-
 .btn:hover {
     background-color: #D66562 !important;
+}
+.btn-pink {
+    display: inline-block;
+    align-self: right;
+    margin: 5px;
+    padding: 6px 12px;
+    background-color: #D66562 !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-pink:hover {
+    background-color: #E393BA !important;
+    text-decoration: none;
 }
 
 button[type="submit"] {
