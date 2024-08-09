@@ -16,7 +16,7 @@ Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy, using a P
 
 ## Features
 
-All site visitors are able to either create their own account or take a spin on our "Demo User" account to have a look around.  
+All site visitors are able to either create their own account or take a spin on the "Demo User" account to have a look around.  
 
 Key Features:
 
