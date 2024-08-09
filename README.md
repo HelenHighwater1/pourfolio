@@ -8,7 +8,11 @@ A bit of history here - about a year ago, during our honeymoon in France, my hus
 
 To solve this problem, I developed Pourfolio as a fun, personal project. The app is designed to store aging schedules and tasting notes in one convenient place. This way, whether it’s 10, 20, or even 30 years from now, we can open the exact bottle we intended, and effortlessly add new tasting notes while reviewing those from previous years.
 
-![log-in](static/imgs/login.jpg)
+<img src="static/imgs/login.jpg" width="600" >
+
+## Technologies
+
+Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  Its frontend is Javascript and React, as well as some Bootstrap.  
 
 ## Features
 
@@ -22,11 +26,8 @@ Key Features:
 - Tasting Note Review: Users can access and review all tasting notes associated with a specific wine, allowing for comparisons and historical tracking.
 - Vineyard Management: Users have the capability to create and edit information about vineyards.
 
-![view wine](static/imgs/wine-view.png)
+<img src="static/imgs/wine-view.png" width="600" >
 
-## Technologies
-
-Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  Its frontend is Javascript and React, as well as some Bootstrap.  
 
 ## Special Features
 
