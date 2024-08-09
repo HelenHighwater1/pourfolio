@@ -5,7 +5,6 @@ Pourfolio is wine cellar tracking application. It offers users the ability to cr
 A bit of history here - about a year ago, during our honeymoon in France, my husband and I selected some of our favorite wines with the intention of aging them to enjoy on future anniversaries. Initially, we used individual tags to mark the years we planned to drink each bottle... but that ended up being a mess - tags everywhere!
 
 To solve this problem, I developed Pourfolio as a fun, personal project. The app is designed to store aging schedules and tasting notes in one convenient place. This way, whether it’s 10, 20, or even 30 years from now, we can open the exact bottle we intended, and effortlessly add new tasting notes while reviewing those from previous years.
-Curious about what people have to say? Take a look now at the [live site](https://www.pourfolio.com)!
 
 ![log-in](static/imgs/login.png)
 
@@ -35,6 +34,8 @@ Pourfolio has a backend framework of Python, Flask, Jinja, and SQLAlchemy; using
     code snippet
 ```
 
+### React Modal 
+![ezgif com-gif-maker](static/imgs/edit vineyard.mov)
 
 ### Ajax
 
