@@ -76,7 +76,7 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
 ```
 
 ### React Modal 
-WILL HAVE GIF OF MODAL IN ACTION
+![til](/static/imgs/edit-vineyard.gif)
 
 ### Ajax
 
