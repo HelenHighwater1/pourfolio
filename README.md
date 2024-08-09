@@ -14,11 +14,11 @@ All site visitors are able to either create their own account, or take a spin on
 
 Key Features:
 
-User Account Management: Users can create accounts and log in to access their personal wine cellars.
-Cellar Management: Users can view, search, and filter their wine cellars, making it easy to organize and view their collections.
-Wine Addition and Tracking: Users can add new bottles to their cellars, set up aging schedules, and track consumption with detailed tasting notes for each bottle.
-Tasting Note Review: Users can access and review all tasting notes associated with a specific wine, allowing for comparisons and historical tracking.
-Vineyard Management: Users have the capability to create and edit information about vineyards.
+- User Account Management: Users can create accounts and log in to access their personal wine cellars.
+- Cellar Management: Users can view, search, and filter their wine cellars, making it easy to organize and view their collections.
+- Wine Addition and Tracking: Users can add new bottles to their cellars, set up aging schedules, and track consumption with detailed tasting notes for each bottle.
+- Tasting Note Review: Users can access and review all tasting notes associated with a specific wine, allowing for comparisons and historical tracking.
+- Vineyard Management: Users have the capability to create and edit information about vineyards.
 
 ![view wine](static/imgs/wine-view.png)
 
