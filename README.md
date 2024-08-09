@@ -36,7 +36,7 @@ Pourfolio has a backend framework of Python, Flask, Jinja, and SQLAlchemy; using
 
 
 ### Ajax
-In order to simplify filtering and data analysis later, I decided to include a lot of joined tables in my schema.  Because of this, I needed to use entity IDs instead of names when creating new beers or reviews.  However, I don't expect a user to type in a Brewery ID when they only know the name.  To fix this, I included some methods to translate user input strings to find the correct ID in the database.  
+
 
 ```javascript 
     code snippet
