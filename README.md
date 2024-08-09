@@ -12,7 +12,7 @@ To solve this problem, I developed Pourfolio as a fun, personal project. The app
 
 ## Technologies
 
-Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a PostgreSQL database.  The frontend is Javascript and React, as well as some Bootstrap.  
+Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy, using a PostgreSQL database.  The frontend is Javascript and React, as well as some Bootstrap.  
 
 ## Features
 
@@ -80,7 +80,8 @@ WILL HAVE GIF OF MODAL IN ACTION
 
 ### Ajax
 
-I wanted to use a really dynamic filter function - below you can see that I have one function that will filter the cellar based on both the category and the specific value to filter.  This simplifies the backend code into one function, instead of breaking it out to seven functions - one for each value of the filter.    
+I wanted to be able to filter wines on a number of different fields (year, varietal, vineyard, etc), but I didn't want ton of repetitive code for each vineyard.  So, I set up a dynamic filter function, ajax call, backend endpoint, and crud function that could handle any field I wanted to filter on.
+
 
 filters.js:
 ```javascript 
