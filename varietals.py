@@ -61,6 +61,7 @@ VARIETAL_IMG_DICT = {
     "Cornas":'static/imgs/generic_red.png',
     "Gigondas":'static/imgs/generic_red.png',
     "Syrah/Shiraz":'static/imgs/generic_red.png',
+    "Syrah":'static/imgs/generic_red.png',
     "Bordeaux":'static/imgs/generic_red.png',
     "Zinfandel":'static/imgs/generic_red.png',
     "Malbec":'static/imgs/generic_red.png',

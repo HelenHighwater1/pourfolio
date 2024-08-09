@@ -2,38 +2,40 @@
 {% block title %}Add to Cellar{% endblock %}
 
 {% block body %}
-<h3>Create a tasting note for this bottle? </h3>
-<div style="display:flex; flex-direction: row;">
-    <div style="width: 60%;">
-        <div class="form-container">
-            <form action="/create_tasting_note/{{bottle.bottle_id}}" method="POST">
-                <div class="form-line">
-                    <label for="note">Tasting Note: </label>
-                    <textarea class="form-control" id="note" name="note" rows="4"></textarea>
-                </div>
-                <div class="form-line">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <div style="width: 40%;">
-        <form action="/lots/{{bottle.lot_id}}">
-            <div class="form-line">
-                <button type="submit">Skip the tasting note</button>
+<div id="notes-grid" style="width:70%; margin: 0 auto;">
+
+    <h3>Create a tasting note for this bottle? </h3>
+    <div style="display:flex; flex-direction: row; align-items: space-between; ">
+
+            <div class="form-container" style="width:100%">
+                <form action="/create_tasting_note/{{bottle.bottle_id}}" method="POST">
+                    <div class="form-line">
+                        <label for="note">Tasting Note: </label>
+                        <textarea class="form-control" id="note" name="note" rows="4"></textarea>
+                    </div>
+                    <div class="form-line">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
             </div>
-        </form>
-        <form action="/undo_drink_bottle/{{bottle.bottle_id}}" method="POST">
-            <div class="form-line">
-                <button type="submit">Undo drink bottle</button>
+
+        
+            <div>
+                <form action="/lots/{{bottle.lot_id}}">
+                    <div class="form-line">
+                        <button type="submit">Skip the tasting note</button>
+                    </div>
+                </form>
+                <form action="/undo_drink_bottle/{{bottle.bottle_id}}" method="POST">
+                    <div class="form-line">
+                        <button type="submit">Undo drink bottle</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    
+  
     </div>
+
 </div>
-
-
 
 
 {% endblock %}

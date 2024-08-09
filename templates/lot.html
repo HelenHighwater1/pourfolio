@@ -16,9 +16,11 @@
                 <h4>{{ lot.vintage.year }} </h4>
             </div>
             <div style="padding-bottom: 20px;">
+                {% if count_all_bottles %}
                 <form style="margin:10px;" action='/drink/{{ lot.lot_id }}'>
                     <button type="submit">Drink a bottle</button>
                 </form>
+                {% endif %}
                 <div style="margin:10px; display: flex; flex-direction: row;">
                     <form action='/create_aging_schedule/{{ lot.lot_id }}'>
                         <button type="submit">Add bottles</button>
