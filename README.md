@@ -31,9 +31,81 @@ Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a P
 ## Special Features
 
 ### React
+Although this did not start as a React app, I wanted to test the waters with React.  I kind of sandboxed this by incorporating it into a non-essential part of the app - Vinyards was great because it is a simple table and doesn't really touch anything in the main functionality.  
+
+In the code below, I  use a conditionally rendered modal to edit the vineyard information, save the updates, and then loop through the vineyard list to replace the old vineyard information with the updated information.
+
 
 ```javascript 
-    
+
+function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
+  const [name, setName] = React.useState(vineyard.name);
+  const [region, setRegion] = React.useState(vineyard.region);
+  const [country, setCountry] = React.useState(vineyard.country);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    fetch(`/update_vineyard/${vineyard.vineyard_id}`, {
+      method: 'POST',
+      body: JSON.stringify({ name, region, country }),
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(res => {  
+        setVineyards(vineyards => vineyards.map(v => v.vineyard_id === vineyard.vineyard_id ? res : v));
+        closeModal();
+    });
+  };
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={closeModal}>&times;</span>
+        <h4>Edit {vineyard.name}</h4>
+          <form onSubmit={handleSubmit}>
+            <div class="form-line">
+              <label htmlFor="name">Vineyard Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={evt => setName(evt.target.value)}
+                placeholder="Enter vineyard name"
+              />
+            </div>
+            <div class="form-line">
+              <label htmlFor="region">Region:</label>
+              <input
+                type="text"
+                id="region"
+                name="region"
+                value={region}
+                onChange={evt => setRegion(evt.target.value)}
+                placeholder="Enter region"
+              />
+            </div>
+            <div class="form-line">
+              <label htmlFor="country">Country:</label>
+              <input
+                type="text"
+                id="country"
+                name="country"
+                value={country}
+                onChange={evt => setCountry(evt.target.value)}
+                placeholder="Enter country"
+              />
+            </div>
+            <div class="form-line">
+              <button type="submit">Save</button>
+            </div>
+          </form>
+
+      </div>
+    </div>
+  );
+}
+
 ```
 
 ### React Modal 
@@ -43,7 +115,40 @@ Pourfolio has a backend stack of Python, Flask, Jinja, and SQLAlchemy; using a P
 
 
 ```javascript 
-    code snippet
+function apply_filters(evt) {
+    evt.preventDefault();
+    const filterItm = evt.target.id
+    const filterVal = evt.target.value
+
+    const url = `/filter_cellar?filter_on=${filterItm}&filter_val=${filterVal}`
+
+    fetch(url)
+        .then(response => response.json())
+        .then(res => {    
+            document.querySelector('#cellar_lots').innerHTML = '';
+            document.querySelector('#cellar_lots').classList.add("card-columns");
+            document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;
+         
+            res.forEach(lot => {
+                document.querySelector('#cellar_lots').insertAdjacentHTML(
+                    'beforeend', 
+                    `<div class="card" >
+                        <a href='/lots/${lot.lot_id }'>
+                            <img class="card-img-top" src='${lot.image}' alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">${lot.wine_name}</p>
+                                <p class="card-subtitle">${lot.vineyard_name}, ${lot.varietal}</p>
+                                <p class="card-subtitle">${new Date(lot.vintage).getFullYear()}</p>
+                            </div>
+                        </a>
+                        
+                    </div>`
+                )
+            })
+            document.querySelector(`#${filterItm}`).value=filterItm
+        })
+}
+
 ```
 
 
