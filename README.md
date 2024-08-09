@@ -1,4 +1,4 @@
-![logo](static/imgs/pourfolio-logo.png)
+![logo](static/imgs/pourfolio-logo.png =250x)
 # Pourfolio
 Pourfolio is wine cellar tracking application. It offers users the ability to create aging schedules, take tasting notes, and review historical tasting data.
 
