@@ -154,6 +154,11 @@ button:focus {
 
 }
 
+.card-header {
+    background-color: #D66562 !important;
+    color: white;
+}
+
 
 
 /* MODAL */
