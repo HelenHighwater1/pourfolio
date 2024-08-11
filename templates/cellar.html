@@ -9,6 +9,12 @@
         <h4>Filter by:</h4>
             <div id="filtered-by"></div>
             <div class="filter-items">
+                <select id="drinkable-now">
+                    <option value="drinkable-now">All wines</option>
+                    <option id="drinkable-now" value="drinkable-now">Only drinkable now</option>
+                    <option id="drinkable-now" value="all-wines">All wines</option>
+                    
+                </select>
                 <select id="varietal">
                     <option  value="varietal">Varietal</option>
                         {% for item in varietals %}

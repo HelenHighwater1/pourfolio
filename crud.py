@@ -103,7 +103,6 @@ def filter_cellar_lots_on_vineyard_info(filter_on, filter_val, cellar_id):
 
     return all_filtered_lots
 
-
 def get_all_cellar_varietals(cellar_id):
     varietal_query = db.session.query(Lot.varietal).filter(
         Lot.cellar_id == cellar_id

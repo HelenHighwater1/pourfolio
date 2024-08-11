@@ -1,5 +1,5 @@
 'use strict';
-
+const drinkNowFilter = document.querySelector('#drinkable-now')
 const varietalFilter = document.querySelector('#varietal');
 const countryFilter = document.querySelector('#country');
 const regionFilter = document.querySelector('#region');
@@ -33,7 +33,7 @@ function apply_filters(evt) {
                                 <p class="card-subtitle">${new Date(lot.vintage).getFullYear()}</p>
                             </div>
                         </a>
-                        
+
                     </div>`
                 )
             })
@@ -42,7 +42,7 @@ function apply_filters(evt) {
 }
 
 
-const filters = [varietalFilter, vintageFilter, celebrationFilter, vineyardFilter, countryFilter, regionFilter];
+const filters = [drinkNowFilter, varietalFilter, vintageFilter, celebrationFilter, vineyardFilter, countryFilter, regionFilter];
 
 filters.forEach(filter => {
     filter.addEventListener('change', apply_filters);

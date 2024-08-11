@@ -126,8 +126,12 @@ def filter_cellar():
     filter_on = request.args.get('filter_on')
     filter_val = request.args.get('filter_val')
     cellar_id = session['cellar']
-
-    if filter_on in ('vineyard', 'region', 'country'):
+    if filter_on == "drinkable-now":
+        if filter_val == 'drinkable-now':
+            filtered_lots = crud.get_all_drinkable_cellar_lots(session['cellar'])
+        else: 
+            filtered_lots = crud.get_all_cellar_lots(session['cellar'])
+    elif filter_on in ('vineyard', 'region', 'country'):
         filtered_lots = crud.filter_cellar_lots_on_vineyard_info(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)
     else:
         filtered_lots = crud.filter_cellar_lots(filter_on=filter_on, filter_val=filter_val, cellar_id=cellar_id)

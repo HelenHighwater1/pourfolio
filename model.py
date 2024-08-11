@@ -78,7 +78,7 @@ class Lot(db.Model):
             'wine_name': self.wine_name,
             'vintage': self.vintage,
             'celebration': self.celebration,
-            'image': VARIETAL_IMG_DICT[self.varietal]
+            'image': VARIETAL_IMG_DICT.get(self.varietal, 'static/imgs/generic-red')
         }
     
     def image(self):
