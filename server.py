@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify
+from functools import wraps
+
+from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify, abort
 from datetime import datetime
 from model import connect_to_db, db, VARIETALS
 
@@ -11,6 +13,16 @@ import os
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev")
 app.jinja_env.undefined = StrictUndefined
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('user') is None:
+            flash('Please log in to access that page.')
+            return redirect('/')
+        return f(*args, **kwargs)
+    return decorated_function
 
 # -----------------------
 # ----------------------- USER ROUTES -----------------------
@@ -85,6 +97,7 @@ def logout():
 # -----------------------
 
 @app.route('/cellar')
+@login_required
 def cellar():
     user = crud.get_user_by_id(session['user'])
     
@@ -113,6 +126,7 @@ def cellar():
     
 
 @app.route('/add_to_cellar')
+@login_required
 def add_to_cellar():
     all_vineyards = crud.get_all_vineyards()
     return render_template('create_lot.html', all_vineyards=all_vineyards, VARIETALS=VARIETALS)
@@ -124,6 +138,7 @@ def add_to_cellar():
 # -----------------------
 
 @app.route('/filter_cellar')
+@login_required
 def filter_cellar():
     filter_on = request.args.get('filter_on')
     filter_val = request.args.get('filter_val')
@@ -146,6 +161,7 @@ def filter_cellar():
 
 
 @app.route('/search_cellar')
+@login_required
 def search_cellar():
     search_term = request.args.get('search_term')
     cellar_id = session['cellar']
@@ -163,8 +179,11 @@ def search_cellar():
 # -----------------------
 
 @app.route('/lots/<lot_id>')
+@login_required
 def show_lot(lot_id):
     lot = crud.get_lot_by_id(lot_id)
+    if not lot:
+        abort(404)
     all_tasting_notes = crud.get_all_tasting_notes(lot_id)
     count_all_bottles = crud.get_count_all_bottles(lot_id)
     count_drinkable_bottles = crud.get_count_drinkable_bottles(lot_id)
@@ -179,9 +198,12 @@ def show_lot(lot_id):
 
 
 @app.route('/create_lot', methods=['POST'])
+@login_required
 def create_lot():
     vineyard_id = request.form['vineyard']
     vineyard = crud.get_vineyard_by_id(vineyard_id)
+    if not vineyard:
+        abort(404)
 
     celebration_val = request.form['celebration']
     if celebration_val == 'true':
@@ -212,14 +234,19 @@ def create_lot():
 # -----------------------
 
 @app.route('/drink/<lot_id>')
+@login_required
 def drink_bottle(lot_id): 
     """Takes the bottle with earliest "drinkable" date and sets it to drunk= True """
     bottle = crud.drink_earliest_drinkable_date_bottle(lot_id)
+    if not bottle:
+        flash('No bottles available to drink.')
+        return redirect(f'/lots/{lot_id}')
 
     return render_template('create_tasting_note.html', bottle=bottle)
 
 
 @app.route('/create_aging_schedule/<lot_id>')
+@login_required
 def create_aging_lot(lot_id):
     if not request.args['bottle_qty'] or not request.args['bottle_qty'].isdigit():
         flash('Invalid or missing bottle quantity parameter.')
@@ -231,19 +258,38 @@ def create_aging_lot(lot_id):
 
 
 @app.route('/add_bottles/<lot_id>', methods=["POST"])
+@login_required
 def add_bottles_to_lot(lot_id):
     lot = crud.get_lot_by_id(lot_id)
-    all_years = request.form.getlist('year')
-    for year in all_years:
-        drinkable_date = datetime(year=int(year), month=1, day=2)
-        bottle = crud.create_bottle(lot=lot, drinkable_date=drinkable_date, purchase_date = datetime.today(), price=0)
+    if not lot:
+        abort(404)
+    quantities = request.form.getlist('qty')
+    years = request.form.getlist('year')
+    skipped = 0
+    for qty_str, year_str in zip(quantities, years):
+        if not year_str or not year_str.strip().isdigit():
+            skipped += 1
+            continue
+        if not qty_str or not qty_str.strip().isdigit() or int(qty_str) < 1:
+            skipped += 1
+            continue
+        qty = int(qty_str)
+        drinkable_date = datetime(year=int(year_str), month=1, day=2)
+        for _ in range(qty):
+            crud.create_bottle(lot=lot, drinkable_date=drinkable_date, purchase_date=datetime.today(), price=0)
+    if skipped:
+        flash(f'{skipped} row(s) skipped due to invalid input.')
     return redirect(f'/lots/{lot_id}')
 
 
 @app.route('/undo_drink_bottle/<bottle_id>', methods=["POST"])
+@login_required
 def undo_drink_bottle(bottle_id):
     bottle = crud.get_bottle_by_id(bottle_id)
+    if not bottle:
+        abort(404)
     bottle.drunk = False
+    db.session.commit()
     return redirect(f'/lots/{bottle.lot_id}')
 
 
@@ -253,8 +299,11 @@ def undo_drink_bottle(bottle_id):
 
 
 @app.route('/create_tasting_note/<bottle_id>', methods=["POST"])
+@login_required
 def create_tasting_note(bottle_id):
     bottle = crud.get_bottle_by_id(bottle_id)
+    if not bottle:
+        abort(404)
     note = request.form['note']
     date = crud.datetime.today()
     user = crud.get_user_by_id(session['user'])
@@ -273,16 +322,19 @@ def create_tasting_note(bottle_id):
 # -----------------------
 
 @app.route('/add_vineyard')
+@login_required
 def add_vineyard():
     return render_template('create_vineyard.html')
 
 
 @app.route('/vineyards')
+@login_required
 def vineyards():
     return render_template('vineyards.html')
 
 
 @app.route('/api/get_vineyards')
+@login_required
 def get_vineyards():
     all_vineyards_query = crud.get_all_vineyards()
     all_vineyards = []
@@ -292,6 +344,7 @@ def get_vineyards():
 
 
 @app.route('/create_vineyard', methods=['POST'])
+@login_required
 def create_vineyard():
     name = request.form['vineyard_name'].strip().capitalize()
     if crud.get_vineyard_by_name(name):
@@ -310,14 +363,17 @@ def create_vineyard():
     return redirect('/add_to_cellar')
 
 @app.route('/edit_vineyard/<vineyard_id>', methods=['GET'])
+@login_required
 def edit_vineyard(vineyard_id):
     """Edits vineyard by searching for the ID and rendering an edit form."""
-    vineyard = crud.get_vineyard_by_id(vineyard_id) 
-    
+    vineyard = crud.get_vineyard_by_id(vineyard_id)
+    if not vineyard:
+        abort(404)
     return render_template('edit_vineyard.html', vineyard=vineyard)
 
 
 @app.route('/update_vineyard/<int:vineyard_id>', methods=['POST'])
+@login_required
 def update_vineyard(vineyard_id):
     """Updates an existing vineyard."""
     name = request.json['name'].strip().capitalize()
@@ -329,8 +385,7 @@ def update_vineyard(vineyard_id):
         vineyard = updated.make_dict()
         return jsonify(vineyard)
     else:
-        flash('Error updating vineyard')
-        return 400
+        return jsonify({"error": "Vineyard not found"}), 404
 
 # ----------------------------------------------------------------
 # -----------------------------------------------------------------

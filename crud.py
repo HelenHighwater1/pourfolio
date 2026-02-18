@@ -80,7 +80,14 @@ def get_cellar_by_id(cellar_id):
 # ----------------------- FILTER CELLAR OPERATIONS -------------------------
 # -----------------------
 
+ALLOWED_LOT_FILTERS = {'varietal', 'vintage', 'celebration'}
+ALLOWED_VINEYARD_FILTERS = {'name', 'region', 'country'}
+
+
 def filter_cellar_lots(filter_on, filter_val, cellar_id):
+    if filter_on not in ALLOWED_LOT_FILTERS:
+        return []
+
     if filter_on == 'celebration':
         if filter_val == 'True':
             filter_val = True
@@ -88,7 +95,7 @@ def filter_cellar_lots(filter_on, filter_val, cellar_id):
             filter_val = False
     all_filtered_lots = db.session.query(Lot).filter(
         Lot.cellar_id == cellar_id
-        ).where(getattr(Lot, f'{filter_on}') == filter_val).all()
+        ).where(getattr(Lot, filter_on) == filter_val).all()
     
     return all_filtered_lots
 
@@ -96,9 +103,12 @@ def filter_cellar_lots_on_vineyard_info(filter_on, filter_val, cellar_id):
     if filter_on == 'vineyard':
         filter_on = 'name'
 
+    if filter_on not in ALLOWED_VINEYARD_FILTERS:
+        return []
+
     all_filtered_lots = db.session.query(Lot).join(Vineyard, Lot.vineyard_id == Vineyard.vineyard_id).filter(
         Lot.cellar_id == cellar_id,
-        getattr(Vineyard, f'{filter_on}') == filter_val
+        getattr(Vineyard, filter_on) == filter_val
     ).all()
 
     return all_filtered_lots
@@ -269,6 +279,9 @@ def drink_earliest_drinkable_date_bottle(lot_id):
     earliest_drinkable_date_bottle = Bottle.query.filter(Bottle.lot_id == lot_id, 
                                                      Bottle.drunk == False
                                                     ).order_by(Bottle.drinkable_date).first()
+
+    if earliest_drinkable_date_bottle is None:
+        return None
 
     earliest_drinkable_date_bottle.drunk = True
     db.session.add(earliest_drinkable_date_bottle)

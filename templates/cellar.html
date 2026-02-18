@@ -60,7 +60,7 @@
     <div id="cellar-main">
         <div id="cellar_lots">
         {% if all_drinkable_cellar_lots %}
-            <div class="card-columns">
+            <div class="cellar-grid">
                 {% for lot in all_cellar_lots %}
                 <div class="card" >
                     <a href='/lots/{{ lot.lot_id }}'>

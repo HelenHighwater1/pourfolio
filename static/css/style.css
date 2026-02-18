@@ -10,12 +10,11 @@ h1, h2, h3, h4, h5, h6, p {
 
 body {
     font-family: "Libre Franklin" !important;
-    margin: 10px;
-    padding: 10px;
+    margin: 0;
+    padding: 0;
 }
 
 .background-img { 
-    margin: 20px;
     background-image: url("/static/imgs/bkg.png"); 
     background-size: cover;
     background-position: center;
@@ -23,11 +22,9 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 97%;
+    width: 100%;
     height: 100%;
     z-index: -2;
-    /* opacity: 0.5; */
-
 }
 
 .container {
@@ -101,8 +98,10 @@ button:focus {
 
 /* CARDS */
 
-.card-columns {
-    column-count: 5 !important;
+.cellar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
 }
 
 #notes-grid .card-columns {
@@ -111,11 +110,10 @@ button:focus {
 
 .card a:hover {
     text-decoration: none;
-
 }
+
 .card {
     overflow: hidden;
-    height: 515px;
     padding: 3px;
     padding-top: 5px;
     border-radius: 10px !important;
@@ -124,10 +122,19 @@ button:focus {
     background-color: whitesmoke !important;
 }
 
+.cellar-grid .card {
+    height: auto;
+}
+
+.cellar-grid .card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
 #notes-grid .card {
     overflow: hidden;
     height: 400px;
- 
 }
 
 .card:hover{
@@ -204,23 +211,23 @@ button:focus {
 
 #cellar-div {
     display: flex;
+    gap: 16px;
+    padding: 16px;
+}
 
+#cellar-main {
+    flex: 1;
+    min-width: 0;
 }
 
 #cellar-filters {
-    margin: 10px;
-    padding: 10px;
-    background: rgb(255, 255, 255, .9);
+    width: 200px;
+    flex-shrink: 0;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.9);
     border: solid rgb(232, 228, 228) 1px;
     border-radius: 5px;
-
-}
-
-#celar-filters select {
-    display: block;
-    align-items: stretch;
-    justify-content: stretch;
-
+    align-self: flex-start;
 }
 
 .filter-items select {
@@ -402,8 +409,23 @@ button[type="submit"]:hover {
 
 /* OTHER */
 
-
 .error {
     color: red;
     font-weight: bold;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    #cellar-div {
+        flex-direction: column;
+    }
+
+    #cellar-filters {
+        width: 100%;
+    }
+
+    .cellar-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
 }

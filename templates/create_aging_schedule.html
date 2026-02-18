@@ -2,32 +2,51 @@
 {% block title %}Add Bottles {% endblock %}
 
 {% block body %}
-<div id="notes-grid" style="width: 50%; margin: 0 auto;">
+<div id="notes-grid" style="width: 60%; margin: 0 auto;">
 
-    <h3>Add bottles </h3>
-    <h4>
-    {{lot.vintage.year}} {{lot.wine_name}}
-    </h4>
-    <div style="display: flex; flex-direction:row; margin:20px;">
-        <div style="width: 40%;margin: auto"> 
+    <h3>Add bottles</h3>
+    <h4>{{lot.vintage.year}} {{lot.wine_name}}</h4>
+
+    <div style="display: flex; flex-direction: row; gap: 24px; margin: 20px 0;">
+        <div style="flex: 1;">
             <div class="form-container">
-                <form action="/add_bottles/{{lot.lot_id}}" method="POST">
-                    {% for i in range(0, bottle_qty) %}
-                        <div class="form-line">
-                            <label for="year">Year to drink:</label>
-                            <input type="integer" name="year" id="year" pattern="202[3-9]||20[3-9]\d">
+                <form id="add-bottles-form" action="/add_bottles/{{lot.lot_id}}" method="POST">
+
+                    <div class="form-line" style="margin-bottom: 16px;">
+                        <button type="button" id="drinkable-now-btn" class="btn">All drinkable now ({{ session['current_year'] }})</button>
+                    </div>
+
+                    <div id="rows-container">
+                        <div class="bottle-row form-line" style="display: flex; gap: 10px; align-items: flex-end; margin-bottom: 10px;">
+                            <div style="flex: 1;">
+                                <label>Quantity</label>
+                                <input type="number" name="qty" min="1" max="{{ bottle_qty }}" value="{{ bottle_qty }}" class="qty-input" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label>Year to drink</label>
+                                <input type="number" name="year" min="2024" max="2100" class="year-input" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div>
+                                <button type="button" class="remove-row-btn btn-pink" style="padding: 8px 12px; visibility: hidden;">✕</button>
+                            </div>
                         </div>
-                    {% endfor %}
-                    <div class="form-line">
-                        <button type="submit">Submit</button>
+                    </div>
+
+                    <div class="form-line" style="margin-top: 8px;">
+                        <button type="button" id="add-row-btn" class="btn-pink" style="cursor: pointer;">+ Add another year</button>
+                    </div>
+
+                    <div class="form-line" style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+                        <span id="counter" style="font-weight: bold;">0 / {{ bottle_qty }} bottles assigned</span>
+                        <button type="submit" id="submit-btn" disabled>Submit</button>
                     </div>
                 </form>
             </div>
         </div>
-        {% if lot_aging_schedule %}
-        <div style="width: 60%; justify-items: center; align-self: center;">
 
-            <div class="card" style="width: 18rem; margin: auto">
+        {% if lot_aging_schedule %}
+        <div style="align-self: flex-start;">
+            <div class="card" style="width: 18rem;">
                 <div class="card-header">
                     Bottles in Cellar:
                 </div>
@@ -42,4 +61,88 @@
     </div>
 
 </div>
+
+<script>
+(function() {
+    const totalBottles = {{ bottle_qty }};
+    const currentYear = {{ session['current_year'] }};
+    const container = document.getElementById('rows-container');
+    const counter = document.getElementById('counter');
+    const submitBtn = document.getElementById('submit-btn');
+    const addRowBtn = document.getElementById('add-row-btn');
+    const drinkableNowBtn = document.getElementById('drinkable-now-btn');
+
+    function createRow() {
+        const row = document.createElement('div');
+        row.className = 'bottle-row form-line';
+        row.style.cssText = 'display: flex; gap: 10px; align-items: flex-end; margin-bottom: 10px;';
+        row.innerHTML =
+            '<div style="flex: 1;">' +
+                '<label>Quantity</label>' +
+                '<input type="number" name="qty" min="1" max="' + totalBottles + '" value="1" class="qty-input" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">' +
+            '</div>' +
+            '<div style="flex: 1;">' +
+                '<label>Year to drink</label>' +
+                '<input type="number" name="year" min="2024" max="2100" class="year-input" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">' +
+            '</div>' +
+            '<div>' +
+                '<button type="button" class="remove-row-btn btn-pink" style="padding: 8px 12px;">✕</button>' +
+            '</div>';
+        return row;
+    }
+
+    function updateCounter() {
+        var total = 0;
+        var inputs = container.querySelectorAll('.qty-input');
+        for (var i = 0; i < inputs.length; i++) {
+            total += parseInt(inputs[i].value) || 0;
+        }
+        counter.textContent = total + ' / ' + totalBottles + ' bottles assigned';
+
+        if (total === totalBottles) {
+            submitBtn.disabled = false;
+            counter.style.color = '';
+        } else {
+            submitBtn.disabled = true;
+            counter.style.color = total > totalBottles ? '#D66562' : '';
+        }
+    }
+
+    function updateRemoveButtons() {
+        var rows = container.querySelectorAll('.bottle-row');
+        for (var i = 0; i < rows.length; i++) {
+            var btn = rows[i].querySelector('.remove-row-btn');
+            btn.style.visibility = rows.length > 1 ? 'visible' : 'hidden';
+        }
+    }
+
+    container.addEventListener('input', updateCounter);
+
+    container.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-row-btn')) {
+            e.target.closest('.bottle-row').remove();
+            updateRemoveButtons();
+            updateCounter();
+        }
+    });
+
+    addRowBtn.addEventListener('click', function() {
+        container.appendChild(createRow());
+        updateRemoveButtons();
+        updateCounter();
+    });
+
+    drinkableNowBtn.addEventListener('click', function() {
+        container.innerHTML = '';
+        var row = createRow();
+        row.querySelector('.qty-input').value = totalBottles;
+        row.querySelector('.year-input').value = currentYear;
+        row.querySelector('.remove-row-btn').style.visibility = 'hidden';
+        container.appendChild(row);
+        updateCounter();
+    });
+
+    updateCounter();
+})();
+</script>
 {% endblock %}

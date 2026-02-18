@@ -18,7 +18,7 @@ function apply_filters(evt) {
         .then(response => response.json())
         .then(res => {    
             document.querySelector('#cellar_lots').innerHTML = '';
-            document.querySelector('#cellar_lots').classList.add("card-columns");
+            document.querySelector('#cellar_lots').classList.add("cellar-grid");
             document.querySelector('#filtered-by').innerHTML = `${filterItm}: ${filterVal}`;
          
             res.forEach(lot => {
@@ -69,7 +69,7 @@ function searchFilter(evt){
         .then(response => response.json())
         .then(res => {
             document.querySelector('#cellar_lots').innerHTML = '';
-            document.querySelector('#cellar_lots').classList.add("card-columns");
+            document.querySelector('#cellar_lots').classList.add("cellar-grid");
             
             res.forEach(lot => {
                 document.querySelector('#cellar_lots').insertAdjacentHTML(
