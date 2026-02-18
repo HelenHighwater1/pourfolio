@@ -1,0 +1,21 @@
+databases:
+  - name: pourfolio-db
+    plan: free
+    databaseName: pourfolio
+
+services:
+  - type: web
+    name: pourfolio
+    plan: free
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn server:app"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pourfolio-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: "3.11.6"
