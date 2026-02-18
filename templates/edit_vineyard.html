@@ -2,14 +2,26 @@
 {% block title %}Update a Vineyard{% endblock %}
 
 {% block body %}
-<h1>Edit {{vineyard.name}} </h1>
-
-<form action="/update_vineyard/{{vineyard.vineyard_id}}" method="POST">
-    Vineyard name: <input type="string" name="vineyard_name" value="{{vineyard.name}}"><br>
-    Region:<input type="string" name="region" value ="{{vineyard.region}}"><br>
-    Country: <input type="string" name="country" value="{{vineyard.country}}"><br>   
-    <input type="submit">
-</form>
-
-
+<div id="notes-grid" style="width: 50%; margin: 0 auto;">
+    <h3>Edit {{ vineyard.name }}</h3>
+    <div class="form-container">
+        <form action="/update_vineyard/{{ vineyard.vineyard_id }}" method="POST">
+            <div class="form-line">
+                <label for="vineyard_name">Vineyard Name:</label>
+                <input id="vineyard_name" type="text" name="vineyard_name" value="{{ vineyard.name }}" required>
+            </div>
+            <div class="form-line">
+                <label for="region">Region:</label>
+                <input id="region" type="text" name="region" value="{{ vineyard.region }}" required>
+            </div>
+            <div class="form-line">
+                <label for="country">Country:</label>
+                <input id="country" type="text" name="country" value="{{ vineyard.country }}" required>
+            </div>
+            <div class="form-line">
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

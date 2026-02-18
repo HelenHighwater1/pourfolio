@@ -3,22 +3,27 @@
     font-size: 60px !important;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3 {
     font-family: "Libre Franklin";
-    font-weight: 100 !important;
+    font-weight: 400 !important;
+    color: #2C2C2C;
+}
+
+h4, h5, h6, p {
+    font-family: "Libre Franklin";
+    font-weight: 300 !important;
+    color: #2C2C2C;
 }
 
 body {
     font-family: "Libre Franklin" !important;
     margin: 0;
     padding: 0;
+    color: #2C2C2C;
 }
 
 .background-img { 
-    background-image: url("/static/imgs/bkg.png"); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(135deg, #fdf0e9 0%, #fef9f4 40%, #f5f0fa 100%);
     position: fixed;
     top: 0;
     left: 0;
@@ -27,14 +32,22 @@ body {
     z-index: -2;
 }
 
-.container {
-    margin: 10px;
-    padding: 10px;
-    background-color: #F2B749;
+.page-wrapper {
+    padding: 20px;
 }
 
 /* NAVBAR */
 
+.navbar-custom {
+    background-color: #C45653 !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-custom .navbar-brand {
+    color: white !important;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
 
 .nav-item {
     width: 100px;
@@ -48,51 +61,114 @@ body {
     color: rgba(245, 245, 245, 0.885) !important;
     font-weight: 200;
 }
+
 .dropdown-menu a {
     color: darkslategrey !important;
     width: 110px;
 }
-.dropdown-menu a:hover, select {
+
+.dropdown-menu a:hover {
     color: darkslategrey !important;
     background-color: white !important;
 }
 
-
-.navbar-custom {
-    background-color: #D66562 !important;
-}
-
 #searchBtn {
-    border-color:whitesmoke;
-    color: whitesmoke
+    border-color: whitesmoke;
+    color: whitesmoke;
 }
-#searchBtn:hover, select {
+
+#searchBtn:hover {
     background-color: #E393BA;
     color: whitesmoke;
     outline: none !important;
 }
 
 
+/* FLASH MESSAGES */
+
+.flash-messages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash-messages li {
+    background-color: rgba(196, 86, 83, 0.15);
+    border: 1px solid #C45653;
+    color: #333;
+    padding: 10px 20px;
+    margin: 10px 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 400;
+}
+
+
 /* BUTTONS */
+
 button {
-    padding: 5px 15px;
+    padding: 8px 16px;
     margin: 5px;
-    background-color: #F2B749;
-    border-radius: 5px !important;
-    border: 1px solid rgb(233, 240, 237);
-    /* text-shadow: 1px 1px 2px #320A59; */
-    box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+    background-color: #E5A839;
+    border-radius: 6px !important;
+    border: none;
     box-sizing: border-box;
     color: white;
     display: inline-block;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 button:hover,
 button:focus {
-    background-color: #320A59;
+    background-color: #2D1B4E;
     color: whitesmoke;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #E5A839;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2D1B4E;
+}
+
+.btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 16px;
+    background-color: #E5A839 !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background-color: #C45653 !important;
+}
+
+.btn-pink {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 16px;
+    background-color: #C45653 !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-pink:hover {
+    background-color: #E393BA !important;
+    text-decoration: none;
 }
 
 
@@ -104,10 +180,6 @@ button:focus {
     gap: 16px;
 }
 
-#notes-grid .card-columns {
-    column-count: 4 !important;
-}
-
 .card a:hover {
     text-decoration: none;
 }
@@ -117,9 +189,11 @@ button:focus {
     padding: 3px;
     padding-top: 5px;
     border-radius: 10px !important;
-    border-color: #F2B749 !important;
-    border-width: 2px;
-    background-color: whitesmoke !important;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .cellar-grid .card {
@@ -132,15 +206,10 @@ button:focus {
     object-fit: cover;
 }
 
-#notes-grid .card {
-    overflow: hidden;
-    height: 400px;
+.card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
-
-.card:hover{
-    border-width: 3px;
-    transition: border-width 0.3s
-}   
 
 .card img {
     border-radius: 10px !important;
@@ -149,23 +218,21 @@ button:focus {
     border-color: #E393BA;
 }
 
-
 .card-title, .card-title:hover {
     font-size: medium;
-    color: rgb(10, 19, 19);
-
+    font-weight: 500 !important;
+    color: #2C2C2C;
 }
+
 .card-subtitle, .card-subtitle:hover {
     font-size: small;
-    color: rgb(10, 19, 19);
-
+    color: #666;
 }
 
 .card-header {
-    background-color: #D66562 !important;
+    background-color: #C45653 !important;
     color: white;
 }
-
 
 
 /* MODAL */
@@ -207,7 +274,19 @@ button:focus {
 }
 
 
-/* CELLAR: */
+/* CELLAR */
+
+.cellar-header {
+    text-align: center;
+    font-weight: 300;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
 
 #cellar-div {
     display: flex;
@@ -224,24 +303,39 @@ button:focus {
     width: 200px;
     flex-shrink: 0;
     padding: 16px;
-    background: rgba(255, 255, 255, 0.9);
-    border: solid rgb(232, 228, 228) 1px;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
     align-self: flex-start;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.filter-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .filter-items select {
     width: 100%;
     min-width: 175px;
-    background-color: whitesmoke !important;
-    border-radius: 5px;
-    border-color: #F2B749;
-    /* color: #D66562 !important;  */
-    margin: 5px !important;
-    padding: 4px;
+    background-color: #fff !important;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    color: #2C2C2C;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Vineyard */
+.filter-items select:focus {
+    outline: none;
+    border-color: #E5A839;
+    box-shadow: 0 0 0 2px rgba(229, 168, 57, 0.25);
+}
+
+
+/* VINEYARD */
 
 .vineyard-list {
     list-style-type: none;
@@ -261,7 +355,7 @@ button:focus {
 }
 
 .vineyard-edit-button {
-    background-color: #D66562;
+    background-color: #C45653;
     color: white;
     border: none;
     border-radius: 3px;
@@ -269,37 +363,125 @@ button:focus {
     cursor: pointer;
 }
 
-/* LOT */
 
-.lot-info {
-    display: flex; 
-    flex-direction: row; 
-    justify-content:space-between; 
-    margin: 20px; 
-    background-color:rgb(252, 251, 251, .9); 
-    border:solid 1px lightgray;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 20px;
+/* LOT PAGE */
+
+.lot-page {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
 }
 
+.lot-info {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.lot-image img {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.lot-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.lot-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
+}
+
+.lot-actions .add-bottles-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lot-actions .add-bottles-form label {
+    margin: 0;
+    font-weight: 400;
+    color: #333;
+}
+
+.lot-actions .add-bottles-form input {
+    width: 70px;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.lot-actions .add-bottles-form input:focus {
+    outline: none;
+    border-color: #E5A839;
+    box-shadow: 0 0 0 2px rgba(229, 168, 57, 0.25);
+}
+
+.lot-aging-card {
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.lot-aging-card .card {
+    width: 18rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notes-section {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.notes-grid .card {
+    height: auto;
+    overflow: visible;
+}
+
+
+/* FORMS */
+
 #notes-grid {
-    background-color: rgb(252, 251, 251, .9);
-    border: solid 1px lightgray;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     padding: 20px;
     margin: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
-    /* FORMS */
 
 .form-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .form-line {
@@ -316,19 +498,29 @@ button:focus {
 .form-line input,
 .form-line select {
     width: calc(100% - 16px);
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     box-sizing: border-box;
+    color: #2C2C2C;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-#font-weight-light {
-    font-weight: light !important;
+.form-line input:focus,
+.form-line select:focus {
+    outline: none;
+    border-color: #E5A839;
+    box-shadow: 0 0 0 2px rgba(229, 168, 57, 0.25);
 }
+
 .form-line .radio-group {
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+.form-line .radio-group input {
+    width: auto;
 }
 
 .form-inline {
@@ -337,50 +529,20 @@ button:focus {
     gap: 10px;
 }
 
-.btn {
-    display: inline-block;
-    margin: 5px;
-    padding: 8px 15px;
-    background-color: #F2B749 !important;
-    color: white !important;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-.btn:hover {
-    background-color: #D66562 !important;
-}
-.btn-pink {
-    display: inline-block;
-    align-self: right;
-    margin: 5px;
-    padding: 6px 12px;
-    background-color: #D66562 !important;
-    color: white !important;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+.tasting-note-page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.btn-pink:hover {
-    background-color: #E393BA !important;
-    text-decoration: none;
+.tasting-note-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-button[type="submit"] {
-    padding: 10px 20px;
-    background-color: rgb(237, 181, 28);
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
-button[type="submit"]:hover {
-    background-color: #320A59;
-}
-
- /* LOGIN / SIGN UP */
+/* LOGIN / SIGN UP */
 
 .login-page {
     position: absolute;
@@ -388,31 +550,67 @@ button[type="submit"]:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     z-index: -1;
 }
+
 .centered {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 80vh;
 }
 
-.login-signup{
-    width: 400px; 
+.login-signup {
+    width: 400px;
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.3);
-    padding: 20px; 
+    padding: 24px;
     border-radius: 10px;
 }
 
-
-
-/* OTHER */
-
-.error {
-    color: red;
-    font-weight: bold;
+.login-signup .form-line input {
+    width: 100%;
 }
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 10px;
+    margin: 0;
+    border: none;
+    border-radius: 0 !important;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: 400;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: none;
+}
+
+.auth-tab:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+.auth-tab.active {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    font-weight: 500;
+}
+
+.auth-panel {
+    padding-top: 4px;
+}
+
 
 /* RESPONSIVE */
 
@@ -427,5 +625,35 @@ button[type="submit"]:hover {
 
     .cellar-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .lot-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lot-image img {
+        width: 150px;
+    }
+
+    .lot-aging-card {
+        align-self: stretch;
+    }
+
+    .lot-aging-card .card {
+        width: 100%;
+    }
+
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-signup {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .tasting-note-actions {
+        flex-direction: column;
     }
 }

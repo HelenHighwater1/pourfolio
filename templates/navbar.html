@@ -1,9 +1,13 @@
 {% if 'user' in session %}
-<nav class="navbar  navbar-expand-lg navbar-dark navbar-custom" style="color: whitesmoke;">
-    <h2 class="mx-3">{{ session['user_name'] }}'s Cellar</h2>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <span class="navbar-brand mx-3">{{ session['user_name'] }}'s Cellar</span>
 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
         <ul class="navbar-nav mr-15 mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="/cellar">Cellar View</a>
@@ -15,12 +19,12 @@
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false" >
-                    ---
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    More
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/vineyards" >View Vineyards</a>
+                    <a class="dropdown-item" href="/vineyards">View Vineyards</a>
                 </div>
             </li>
         </ul>
@@ -34,6 +38,6 @@
 {% else %}
 
 <nav class="navbar navbar-expand-lg justify-content-between navbar-dark navbar-custom">
-    <h2 class="mx-3 text-white font-bold">Welcome to <span class="title-font">Pourfolio</span>!</h2>
+    <span class="navbar-brand mx-3">Welcome to <span class="title-font">Pourfolio</span>!</span>
 </nav>
 {% endif %}

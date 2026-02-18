@@ -5,53 +5,70 @@
 <img src="/static/imgs/pourfolio.jpg" class="login-page" alt="Welcome to Pourfolio">
 <div class="centered">
     <div class="login-signup">
-        <div>
-        <h4 style="text-align: center;">Log In</h4>
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab active" id="tab-login">Log In</button>
+            <button type="button" class="auth-tab" id="tab-signup">Sign Up</button>
+        </div>
 
-        <form action="/login" method="POST">
-            <div class="form-line">
-                <label for="email">Email:</label>
-                <input id="email" type="text" name="email">
-            </div>
-            <div class="form-line">
-                <label for="password">Password:</label>
-                <input id="password" type="password" name="password">
-            </div>
-            <div style="display:flex; flex-direction: row; justify-content: space-between;">
-                <div class="form-inline">
-                    <button type="submit">Sign In</button>
+        <div id="login-panel" class="auth-panel">
+            <form action="/login" method="POST">
+                <div class="form-line">
+                    <label for="login-email">Email:</label>
+                    <input id="login-email" type="text" name="email">
                 </div>
-                <div class="form-inline" style="margin-right: 15px">
+                <div class="form-line">
+                    <label for="login-password">Password:</label>
+                    <input id="login-password" type="password" name="password">
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <button type="submit">Sign In</button>
                     <button name="demo" value="true" type="submit">Try Demo</button>
                 </div>
-            </div>
-        </form>
-        <br>
-        
-        <h4 style="text-align: center;">Sign Up</h4>
-
-        <form action="/sign_up" method="POST">
-            <div class="form-line">
-                <label for="user_name">Username:</label>
-                <input id="user_name" type="text" name="user_name">
-            </div>
-            <div class="form-line">
-                <label for="email">Email:</label>
-                <input id="email" type="text" name="email">
-            </div>
-            <div class="form-line">
-                <label for="password">Password:</label>
-                <input id="password" type="password" name="password">
-            </div>
-            <div class="form-line">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+            </form>
         </div>
-    </div>    
+
+        <div id="signup-panel" class="auth-panel" style="display: none;">
+            <form action="/sign_up" method="POST">
+                <div class="form-line">
+                    <label for="signup-user">Username:</label>
+                    <input id="signup-user" type="text" name="user_name">
+                </div>
+                <div class="form-line">
+                    <label for="signup-email">Email:</label>
+                    <input id="signup-email" type="text" name="email">
+                </div>
+                <div class="form-line">
+                    <label for="signup-password">Password:</label>
+                    <input id="signup-password" type="password" name="password">
+                </div>
+                <div class="form-line">
+                    <button type="submit">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+<script>
+(function() {
+    var tabLogin = document.getElementById('tab-login');
+    var tabSignup = document.getElementById('tab-signup');
+    var loginPanel = document.getElementById('login-panel');
+    var signupPanel = document.getElementById('signup-panel');
 
+    tabLogin.addEventListener('click', function() {
+        loginPanel.style.display = '';
+        signupPanel.style.display = 'none';
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+    });
 
-
+    tabSignup.addEventListener('click', function() {
+        loginPanel.style.display = 'none';
+        signupPanel.style.display = '';
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+    });
+})();
+</script>
 {% endblock %}
