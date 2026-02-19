@@ -184,8 +184,9 @@ def get_all_cellar_vintages(cellar_id):
 def get_lots_by_search_term(cellar_id, search_term):
     search_results = db.session.query(Lot).join(Vineyard).filter(
         Lot.cellar_id == cellar_id).where(or_(
+        Lot.wine_name.ilike(f"%{search_term}%"),
+        Lot.varietal.ilike(f"%{search_term}%"),
         Vineyard.name.ilike(f"%{search_term}%"),
-        Lot.wine_name.ilike(f"%{search_term}%")
         )).distinct().all()
 
     return search_results

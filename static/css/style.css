@@ -237,10 +237,10 @@ button[type="submit"]:hover {
 
 /* MODAL */
 
-.modal {
-    display: flex !important;
-    position: fixed !important;
-    z-index: 1 !important;
+.vineyard-modal-overlay {
+    display: flex;
+    position: fixed;
+    z-index: 1050;
     left: 0;
     top: 0;
     width: 100%;
@@ -248,14 +248,15 @@ button[type="submit"]:hover {
     overflow: auto;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.vineyard-modal-content {
     background-color: #fff;
     z-index: 10;
     padding: 30px;
     border-radius: 4px;
-    width: 50% !important;
+    width: 50%;
 }
 
 .close {

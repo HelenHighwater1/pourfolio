@@ -296,10 +296,20 @@ class TestProtectedRoutes(BaseTestCase):
         res = self.client.get("/add_to_cellar")
         self.assertEqual(res.status_code, 200)
 
+    def test_vineyards_page_returns_200(self):
+        self.login()
+        res = self.client.get("/vineyards")
+        self.assertEqual(res.status_code, 200)
+
     def test_edit_vineyard_not_found(self):
         self.login()
         res = self.client.get("/edit_vineyard/99999")
         self.assertEqual(res.status_code, 404)
+
+    def test_edit_vineyard_page_returns_200(self):
+        self.login()
+        res = self.client.get(f"/edit_vineyard/{self.vineyard.vineyard_id}")
+        self.assertEqual(res.status_code, 200)
 
     def test_undo_drink_not_found(self):
         self.login()
@@ -310,6 +320,69 @@ class TestProtectedRoutes(BaseTestCase):
         self.login()
         res = self.client.post("/create_tasting_note/99999", data={"note": "test"})
         self.assertEqual(res.status_code, 404)
+
+
+# ---------------------------------------------------------------------------
+# Edit Vineyard (API used by React vineyards page)
+# ---------------------------------------------------------------------------
+
+class TestEditVineyardAPI(BaseTestCase):
+    """Tests for /api/get_vineyards and POST /update_vineyard/<id> (edit vineyard flow)."""
+
+    def test_get_vineyards_api_returns_list_when_logged_in(self):
+        self.login()
+        res = self.client.get("/api/get_vineyards")
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertIsInstance(data, list)
+        names = [v["name"] for v in data]
+        self.assertIn("Test Vineyard", names)
+
+    def test_get_vineyards_api_requires_login(self):
+        res = self.client.get("/api/get_vineyards", follow_redirects=False)
+        self.assertEqual(res.status_code, 302)
+        self.assertIn("/", res.headers.get("Location", ""))
+
+    def test_update_vineyard_api_success(self):
+        self.login()
+        payload = {"name": "Updated Vineyard", "region": "Tuscany", "country": "Italy"}
+        res = self.client.post(
+            f"/update_vineyard/{self.vineyard.vineyard_id}",
+            json=payload,
+        )
+        self.assertEqual(res.status_code, 200, res.get_data(as_text=True))
+        data = res.get_json()
+        self.assertEqual(data["name"], "Updated Vineyard")
+        self.assertEqual(data["region"], "Tuscany")
+        self.assertEqual(data["country"], "Italy")
+        self.assertEqual(data["vineyard_id"], self.vineyard.vineyard_id)
+        # Persisted: get_vineyards should return updated data
+        get_res = self.client.get("/api/get_vineyards")
+        get_res.raise_for_status()
+        vineyards = get_res.get_json()
+        updated = next((v for v in vineyards if v["vineyard_id"] == self.vineyard.vineyard_id), None)
+        self.assertIsNotNone(updated)
+        self.assertEqual(updated["name"], "Updated Vineyard")
+        self.assertEqual(updated["country"], "Italy")
+
+    def test_update_vineyard_api_not_found(self):
+        self.login()
+        payload = {"name": "Any", "region": "R", "country": "C"}
+        res = self.client.post("/update_vineyard/99999", json=payload)
+        self.assertEqual(res.status_code, 404)
+        data = res.get_json()
+        self.assertIn("error", data)
+        self.assertIn("not found", data["error"].lower())
+
+    def test_update_vineyard_api_requires_login(self):
+        payload = {"name": "Updated", "region": "R", "country": "C"}
+        res = self.client.post(
+            f"/update_vineyard/{self.vineyard.vineyard_id}",
+            json=payload,
+            follow_redirects=False,
+        )
+        self.assertEqual(res.status_code, 302)
+        self.assertIn("/", res.headers.get("Location", ""))
 
 
 if __name__ == "__main__":

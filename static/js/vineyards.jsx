@@ -20,13 +20,13 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
     });
   };
 
-  return (
-    <div className="modal">
-      <div className="modal-content">
+  return ReactDOM.createPortal(
+    <div className="vineyard-modal-overlay">
+      <div className="vineyard-modal-content">
         <span className="close" onClick={closeModal}>&times;</span>
         <h4>Edit {vineyard.name}</h4>
           <form onSubmit={handleSubmit}>
-            <div class="form-line">
+            <div className="form-line">
               <label htmlFor="name">Vineyard Name:</label>
               <input
                 type="text"
@@ -37,7 +37,7 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
                 placeholder="Enter vineyard name"
               />
             </div>
-            <div class="form-line">
+            <div className="form-line">
               <label htmlFor="region">Region:</label>
               <input
                 type="text"
@@ -48,7 +48,7 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
                 placeholder="Enter region"
               />
             </div>
-            <div class="form-line">
+            <div className="form-line">
               <label htmlFor="country">Country:</label>
               <input
                 type="text"
@@ -59,13 +59,14 @@ function VineyardModal({ vineyard, closeModal, setVineyards, vineyards }) {
                 placeholder="Enter country"
               />
             </div>
-            <div class="form-line">
+            <div className="form-line">
               <button type="submit">Save</button>
             </div>
           </form>
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -102,7 +103,7 @@ function Vineyards() {
             {vineyards.map(vineyard => {
                 return(<li className="vineyard-item" key={vineyard.vineyard_id}>
                     {vineyard.name}: {vineyard.region}, {vineyard.country}   
-                    <button ClassName="vineyard-edit-button" onClick={() => openModal(vineyard)}>Edit</button>
+                    <button className="vineyard-edit-button" onClick={() => openModal(vineyard)}>Edit</button>
                 </li>)
             })}
         </ul>
